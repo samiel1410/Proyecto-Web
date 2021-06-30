@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/pages/home_page.dart';
+import 'package:pagosapp_group/src/pages/main_page.dart';
 //import 'package:provider/provider.dart';
 
 class PagoPage extends StatelessWidget {
@@ -8,12 +8,23 @@ class PagoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(leading: IconButton(
+          icon: Icon(Icons.arrow_back_outlined),
+          onPressed: () => {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MainPage()
+                          ))
+            },
+        ),),
+      
       body: Container(
         child: Center(
           child: Center(
             child: ListView(
               children: <Widget>[
-                ic(context),
+              
                 SizedBox(height: 20),
                 Image.asset(
                   'assets/images/icono_pago.png',
@@ -24,13 +35,13 @@ class PagoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 user(),
                 SizedBox(height: 20),
-                descripcion(),
+                descripcion(context),
                 SizedBox(height: 20),
                 monto(),
                 SizedBox(height: 20),
                 ubicacion(),
                 SizedBox(height: 20),
-                tipo_pago(),
+                TipoPago(),
                 SizedBox(height: 20),
                 boton()
               ],
@@ -81,7 +92,7 @@ Widget user() {
   );
 }
 
-Widget descripcion() {
+Widget descripcion(context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextField(
@@ -97,7 +108,7 @@ Widget descripcion() {
         hintText: "Descripcion",
         hintStyle: TextStyle(
             fontWeight: FontWeight.w700,
-            color: Color.fromRGBO(49, 150, 174, 1)),
+            color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
       ),
@@ -152,7 +163,7 @@ Widget ubicacion() {
   );
 }
 
-Widget tipo_pago() {
+Widget TipoPago() {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextField(
@@ -187,30 +198,6 @@ Widget boton() {
       color: Color.fromRGBO(46, 44, 170, 1),
       child:
           Text('Agregar', style: TextStyle(color: Colors.white, fontSize: 20)),
-    ),
-  );
-}
-
-Widget ic(context) {
-  return Container(
-    child: Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back_outlined),
-            iconSize: 40,
-            onPressed: () => {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage(
-                            titulo: "",
-                          )))
-            },
-          ),
-        ],
-      ),
     ),
   );
 }

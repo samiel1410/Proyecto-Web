@@ -21,6 +21,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: Container(child: contentWidget[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,

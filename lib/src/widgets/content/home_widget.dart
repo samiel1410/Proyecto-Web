@@ -1,11 +1,14 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/api/api.dart';
-import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
+
 import 'package:pagosapp_group/src/widgets/lists/pagos_list.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
 //mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
+<<<<<<< HEAD
 import 'package:provider/provider.dart';
+=======
+
+>>>>>>> 13a502274ee29ec75b46270236ec8ec992529bb5
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({Key? key}) : super(key: key);
@@ -34,7 +37,12 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
           Text("Pagos Pendientes",
               style: Theme.of(context).textTheme.headline5),
+<<<<<<< HEAD
           PagossList(),
+=======
+          PagosList(),
+          
+>>>>>>> 13a502274ee29ec75b46270236ec8ec992529bb5
         ],
       ),
     );
