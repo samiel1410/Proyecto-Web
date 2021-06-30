@@ -28,28 +28,26 @@ class _PagosListState extends State<PagosList> {
     setState(() {
       data.forEach((value) {
         pagosList.add(value);
-        print(pagosList);
+        //print(pagosList);
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      ListView.builder(
-        shrinkWrap: true,
-        itemCount: pagosList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return buildResultCard(pagosList[index]);
-          /*return ListTile(
-                    title: Text(
-                      pagosList[index].title,
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    subtitle: Text(pagosList[index].amount));*/
-        },
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: pagosList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return buildResultCard(pagosList[index]);
+            },
+          ),
+        ]),
       ),
-    ]);
+    );
   }
 }
 
@@ -58,7 +56,7 @@ Widget buildResultCard(data) {
     child: ListTile(
       title: Text(data['title'] ?? ""),
       subtitle: Text(data['adress'] ?? ""),
-      leading: Image.asset("assets/images/icono_internet.png"),
+      leading: Image.asset("assets/images/pago.png"),
     ),
   );
 }

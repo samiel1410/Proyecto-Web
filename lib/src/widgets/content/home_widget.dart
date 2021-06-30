@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:pagosapp_group/api/api.dart';
 import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
 import 'package:pagosapp_group/src/widgets/lists/pagos_list.dart';
+import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
 //mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
-import 'package:pagosapp_group/src/widgets/lists/payment_list.dart';
 import 'package:provider/provider.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -34,7 +34,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           ),
           Text("Pagos Pendientes",
               style: Theme.of(context).textTheme.headline5),
-          PagosList(),
+          PagossList(),
         ],
       ),
     );
