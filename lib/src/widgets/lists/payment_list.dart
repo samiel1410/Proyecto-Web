@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:pagosapp_group/api/api.dart';
 import 'package:pagosapp_group/src/models/payment_model.dart';
@@ -48,11 +47,3 @@ class _PaymentListState extends State<PaymentList> {
   }
 }
 
-/*Widget buildResultCard(data) {
-  return Card(
-    child: ListTile(
-      title: Text(data['title']),
-      subtitle: Text(data['address']),
-    ),
-  );
-}*/

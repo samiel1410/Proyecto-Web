@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-import 'package:pagosapp_group/api/api.dart';
-import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
+
 
 class PagosList extends StatefulWidget {
   @override
@@ -36,6 +35,7 @@ class _PagosListState extends State<PagosList> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      
       ListView.builder(
         shrinkWrap: true,
         itemCount: pagosList.length,
@@ -49,6 +49,7 @@ class _PagosListState extends State<PagosList> {
                     subtitle: Text(pagosList[index].amount));*/
         },
       ),
+      
     ]);
   }
 }

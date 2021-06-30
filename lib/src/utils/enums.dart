@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pagosapp_group/src/pages/add_tarjeta.dart';
+import 'package:pagosapp_group/src/pages/pago_page.dart';
 import 'package:pagosapp_group/src/pages/perfil_page.dart';
 import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
 
@@ -18,5 +19,5 @@ class ItemMenu{
  ];
 
  List<Widget>contentWidget=[
-   HomeWidget(),PerfilPage(),AddTarjeta()
+   HomeWidget(),AddTarjeta(),PagoPage()
  ];
