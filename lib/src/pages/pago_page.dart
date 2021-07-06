@@ -31,19 +31,19 @@ class PagoPage extends StatelessWidget {
                   height: 200,
                 ),
                 SizedBox(height: 30),
-                titulo(),
+                titulo(context),
                 SizedBox(height: 20),
-                user(),
+                user(context),
                 SizedBox(height: 20),
                 descripcion(context),
                 SizedBox(height: 20),
-                monto(),
+                monto(context),
                 SizedBox(height: 20),
-                ubicacion(),
+                ubicacion(context),
                 SizedBox(height: 20),
-                TipoPago(),
+                tipoPago(context),
                 SizedBox(height: 20),
-                boton()
+                boton(context)
               ],
             ),
           ),
@@ -53,7 +53,7 @@ class PagoPage extends StatelessWidget {
   }
 }
 
-Widget titulo() {
+Widget titulo(context) {
   return Container(
     child: Center(
       child: Row(
@@ -61,15 +61,15 @@ Widget titulo() {
         children: [
           Text(
             "Agregar Pago",
-            style: TextStyle(fontSize: 50, fontWeight: FontWeight.w700),
-          )
+            style: Theme.of(context).textTheme.headline2),
+          
         ],
       ),
     ),
   );
 }
 
-Widget user() {
+Widget user(context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextField(
@@ -79,12 +79,12 @@ Widget user() {
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+          borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
-        hintText: "NOMBRE",
+        hintText: "Nombre",
         hintStyle: TextStyle(
             fontWeight: FontWeight.w700,
-            color: Color.fromRGBO(49, 150, 174, 1)),
+            color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
       ),
@@ -103,7 +103,7 @@ Widget descripcion(context) {
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+          borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
         hintText: "Descripcion",
         hintStyle: TextStyle(
@@ -116,7 +116,7 @@ Widget descripcion(context) {
   );
 }
 
-Widget monto() {
+Widget monto(context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextField(
@@ -127,12 +127,12 @@ Widget monto() {
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+          borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
         hintText: "Monto",
         hintStyle: TextStyle(
             fontWeight: FontWeight.w700,
-            color: Color.fromRGBO(49, 150, 174, 1)),
+            color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
       ),
@@ -140,7 +140,7 @@ Widget monto() {
   );
 }
 
-Widget ubicacion() {
+Widget ubicacion(context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextField(
@@ -150,12 +150,12 @@ Widget ubicacion() {
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+          borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
         hintText: "Ubicacion",
         hintStyle: TextStyle(
             fontWeight: FontWeight.w700,
-            color: Color.fromRGBO(49, 150, 174, 1)),
+            color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
       ),
@@ -163,7 +163,7 @@ Widget ubicacion() {
   );
 }
 
-Widget TipoPago() {
+Widget tipoPago(context) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     child: TextField(
@@ -173,12 +173,12 @@ Widget TipoPago() {
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+          borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
         hintText: "Tipo de Pago",
         hintStyle: TextStyle(
             fontWeight: FontWeight.w700,
-            color: Color.fromRGBO(49, 150, 174, 1)),
+            color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
       ),
@@ -186,7 +186,7 @@ Widget TipoPago() {
   );
 }
 
-Widget boton() {
+Widget boton(context) {
   return Container(
     child: MaterialButton(
       shape: RoundedRectangleBorder(
@@ -195,9 +195,9 @@ Widget boton() {
       minWidth: 10.0,
       height: 50.0,
       onPressed: () {},
-      color: Color.fromRGBO(46, 44, 170, 1),
+      color:Theme.of(context).accentColor,
       child:
-          Text('Agregar', style: TextStyle(color: Colors.white, fontSize: 20)),
-    ),
+          Text('Agregar',  style: Theme.of(context).textTheme.headline5!.copyWith(color: Theme.of(context).accentColor,fontWeight: FontWeight.bold)),),
+    
   );
 }

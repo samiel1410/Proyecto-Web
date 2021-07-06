@@ -24,13 +24,11 @@ class LoginPage extends StatelessWidget {
                SizedBox(height: 20),
               ic(context),
                   SizedBox(height: 40),
-              titulo(),
+              titulo(context),
                   SizedBox(height: 20),
-              user(),
-                  
-          
+              user(context),
                     SizedBox(height: 20),
-              password(),
+              password(context),
         SizedBox(height: 30),
               boton(),
               nologin(context)
@@ -46,16 +44,16 @@ class LoginPage extends StatelessWidget {
   }
  
 }
-Widget titulo(){
+Widget titulo(context){
     return Container(child: Center(child: Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text("INICIAR SESION",style: TextStyle(fontSize: 50,fontWeight: FontWeight.w700),)
+      Text("INICIAR SESION",style:  Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold)),
     ],
   ),),);
 
 }
-Widget user(){
+Widget user(context){
   return Container(
     padding: EdgeInsets.symmetric(horizontal:15,vertical:5),
     child: TextField(
@@ -68,7 +66,7 @@ Widget user(){
             borderSide: const BorderSide(color: Colors.blue, width: 3.0),
          ),
         hintText: " USUARIO O CORREO",
-         hintStyle: TextStyle(fontWeight: FontWeight.w700 ,color: Color.fromRGBO(49, 150, 174, 1)),
+         hintStyle: TextStyle(fontWeight: FontWeight.w700 ,color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
       ),
@@ -78,7 +76,7 @@ Widget user(){
 
 
 
-Widget password(){
+Widget password(context){
   return Container(
     padding: EdgeInsets.symmetric(horizontal:15,vertical:5),
     child: TextField(
@@ -91,7 +89,7 @@ Widget password(){
             borderSide: const BorderSide(color: Colors.blue, width: 3.0),
          ),
         hintText: "CONTRASEÑA",
-         hintStyle: TextStyle(fontWeight: FontWeight.w700 ,color: Color.fromRGBO(49, 150, 174, 1)),
+        hintStyle: TextStyle(fontWeight: FontWeight.w700 ,color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
         

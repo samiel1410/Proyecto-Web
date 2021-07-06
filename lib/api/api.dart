@@ -31,8 +31,12 @@ class PagosAppProvider {
   final String url = 'http://10.0.2.2:8000/apis/v1/?format=json';
   Client client = Client();
   Future<List<Payment>> fetchPosts() async {
-    //final url = 'http://jsonplaceholder.typicode.com/comments';
-    final response = await client.get(Uri.parse(url));
+    final response = await client.get(Uri.parse(url),headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With"
+      }) ;
+    
     if (response.statusCode == 200) {
       print("SI SE PUEDE");
       final parsed = json.decode(response.body);

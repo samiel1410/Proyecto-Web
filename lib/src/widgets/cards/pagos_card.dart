@@ -9,9 +9,9 @@ class PagosCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(currentPayment.title),
+        /*title: Text(currentPayment.title),
         subtitle: Text(currentPayment.address),
-        leading: Image.asset("assets/images/pago.png"),
+        leading: Image.asset("assets/images/pago.png"),*/
       ),
     );
   }

@@ -36,11 +36,11 @@ class AddTarjeta extends StatelessWidget {
     
             
                   SizedBox(height: 30),
-              titulo(),
+              titulo(context),
                   SizedBox(height: 20),
               user(context),
               SizedBox(height: 20),
-              boton()
+              boton(context)
         
             ],
           ),
@@ -53,11 +53,11 @@ class AddTarjeta extends StatelessWidget {
   }
  
 }
-Widget titulo(){
+Widget titulo(context){
     return Container(child: Center(child: Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text("Agregar Tarjeta",style: TextStyle(fontSize: 50,fontWeight: FontWeight.w700),)
+      Text("Agregar Tarjeta",style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold)),
     ],
   ),),);
 
@@ -72,9 +72,9 @@ Widget user(context){
         borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(5),),
           focusedBorder:OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+            borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
          ),
-        hintText: "NOMBRE",
+        hintText: "Nombre",
          hintStyle: TextStyle(color: Theme.of(context).accentColor),
         fillColor: Colors.white,
         filled: true,
@@ -84,7 +84,7 @@ Widget user(context){
 }
 
 
-Widget boton(){
+Widget boton(context){
   return Container(child:MaterialButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.0),
@@ -94,6 +94,6 @@ Widget boton(){
           onPressed: () {},
           color: Color.fromRGBO(46, 44, 170,1),
           child: Text('Agregar',
-              style: TextStyle(color: Colors.white, fontSize: 20)),
+              style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold)),
         ) ,);
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1098952444553",
+    "project_id": "proyecto-5e4b9",
+    "storage_bucket": "proyecto-5e4b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098952444553:android:e8c243cc167b58add65458",
+        "android_client_info": {
+          "package_name": "com.pagosapp.pagosapp_group"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098952444553-bht65rr5ogeiq3eik2asaa89v8u5gkt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0WQQq7uiDzQq06P5EFMRRsh3IDCbsvJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098952444553-bht65rr5ogeiq3eik2asaa89v8u5gkt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
