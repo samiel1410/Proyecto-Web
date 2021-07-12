@@ -16,4 +16,8 @@ List<ItemMenu> menuOptions = [
   ItemMenu(Icons.account_circle_outlined, "Perfil"),
 ];
 
-List<Widget> contentWidget = [HomeWidget(), AddTarjeta(), PerfilPage()];
+List<Widget> contentWidget = [
+  HomeWidget(person: null),
+  AddTarjeta(),
+  PerfilPage()
+];
