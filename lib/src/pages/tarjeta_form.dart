@@ -35,10 +35,10 @@ class AddTarjeta extends StatelessWidget {
          Image.asset('assets/images/icono_tarjeta.png',height: 100,),
     
             
-                  SizedBox(height: 30),
+                SizedBox(height: 30),
               titulo(context),
-                  SizedBox(height: 20),
-              user(context),
+              SizedBox(height: 20),
+              name(context),
               SizedBox(height: 20),
               boton(context)
         
@@ -50,7 +50,9 @@ class AddTarjeta extends StatelessWidget {
       ),
     );
     
+    
   }
+  
  
 }
 Widget titulo(context){
@@ -62,12 +64,13 @@ Widget titulo(context){
   ),),);
 
 }
-Widget user(context){
+Widget name(context){
   return Container(
     padding: EdgeInsets.symmetric(horizontal:15,vertical:5),
     child: TextField(
      
       decoration: InputDecoration(
+         suffixIcon: Icon(Icons.person),
         border: OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(5),),
@@ -97,3 +100,4 @@ Widget boton(context){
               style: Theme.of(context).textTheme.headline5!.copyWith(fontWeight: FontWeight.bold)),
         ) ,);
 }
+

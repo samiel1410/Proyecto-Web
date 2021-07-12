@@ -30,9 +30,28 @@ class _HomeWidgetState extends State<HomeWidget> {
           SizedBox(
             height: 20.0,
           ),
-          Text("Pagos Pendientes",
-              style: Theme.of(context).textTheme.headline5),
+           Row( mainAxisAlignment:MainAxisAlignment.spaceAround,
+              children:[Text("Pagos Pendientes",
+              style: Theme.of(context).textTheme.headline5),RaisedButton(
+    child: Icon(Icons.add),
+    onPressed: () {
+      showAboutDialog(
+        context: context,
+        applicationIcon: FlutterLogo(),
+        applicationName: 'Woolha.com App',
+        applicationVersion: '0.0.1',
+        applicationLegalese: '©2020 Woolha.com',
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 15),
+            child: Text('This is an about dialog in Flutter')
+          )
+        ],
+      );
+    },
+  )]),
          PaymentsList()
+         
           
         ],
       ),

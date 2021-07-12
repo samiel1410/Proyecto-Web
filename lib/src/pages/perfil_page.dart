@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/widgets/lists/cards_list.dart';
+
 
 class PerfilPage extends StatelessWidget {
   const PerfilPage({Key? key}) : super(key: key);

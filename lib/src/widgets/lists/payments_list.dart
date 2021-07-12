@@ -30,7 +30,7 @@ class _PaymentsListState extends State<PaymentsList> {
       ),
     ):
     Column(
-     
+      
         children:_payments.map((e) => PaymentCard(pay: e)).toList()
     
     );

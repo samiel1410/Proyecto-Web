@@ -3,7 +3,6 @@ import 'package:pagosapp_group/services/card_service.dart';
 import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/cards_card.dart';
 
-import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
 
 
 
