@@ -20,7 +20,11 @@ List<ItemMenu> menuOptions = [
 ];
 
 List<Widget> contentWidget = [
+<<<<<<< Updated upstream
   HomeWidget(),               
+=======
+  HomeWidget(person: ),
+>>>>>>> Stashed changes
   AddTarjeta(),
   PagoPage()
 ];
