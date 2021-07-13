@@ -16,6 +16,7 @@ class Payment {
     this.address,
     this.typePage,
     required this.date,
+    
   });
 
   String title;
@@ -24,6 +25,7 @@ class Payment {
   String? address;
   String? typePage;
   DateTime date;
+  
 
   factory Payment.fromJson(Map<String, dynamic> json) => Payment(
         title: json["title"],
@@ -32,6 +34,7 @@ class Payment {
         address: json["address"],
         typePage: json["typePage"],
         date: DateTime.parse(json["date"]),
+       
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,5 +45,6 @@ class Payment {
         "typePage": typePage,
         "date":
             "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+        
       };
 }

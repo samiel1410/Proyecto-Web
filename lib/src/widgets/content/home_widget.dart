@@ -1,12 +1,16 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/src/models/person_model.dart';
+import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
+import 'package:pagosapp_group/src/widgets/lists/cards_list.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
-
+import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';
 
 //mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
 
 class HomeWidget extends StatefulWidget {
-  HomeWidget({Key? key}) : super(key: key);
+  HomeWidget({Key? key }) : super(key: key);
+  
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
@@ -50,7 +54,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       );
     },
   )]),
-         PaymentsList()
+      PaymentsList1()
          
           
         ],

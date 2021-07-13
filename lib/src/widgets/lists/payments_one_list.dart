@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/services/paymet1_service.dart';
 
-import 'package:pagosapp_group/services/payment_service.dart';
-import 'package:pagosapp_group/services/payment_type_service.dart';
+
+
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
 
-class PaymentsList extends StatefulWidget {
-  const PaymentsList({Key? key, required this.idperson}) : super(key: key);
-  final String idperson;
+class PaymentsList1 extends StatefulWidget {
+  const PaymentsList1({Key? key,}) : super(key: key);
+  
 
   @override
   _PaymentsListState createState() => _PaymentsListState();
 }
 
-class _PaymentsListState extends State<PaymentsList> {
-  PaymentService _service = PaymentService();
-  PaymentTypeService _services = PaymentTypeService();
+class _PaymentsListState extends State<PaymentsList1> {
+  PaymentService1 _service = PaymentService1();
   List<Payment> _payments = [];
 
   @override
@@ -23,7 +23,7 @@ class _PaymentsListState extends State<PaymentsList> {
     super.initState();
     _loadPayments();
     //Imprimir los tipos de pago
-    _loadPaymentsType();
+  
   }
 
   @override
@@ -38,14 +38,10 @@ class _PaymentsListState extends State<PaymentsList> {
   }
 
   _loadPayments() {
-    _service.getPayament(widget.idperson).then((value) {
+    _service.getPayament1().then((value) {
       _payments = value;
       setState(() {});
-      //print(_payments);
     });
   }
 
-  _loadPaymentsType() {
-    _services.getTypes().then((value) => print(value));
-  }
 }

@@ -2,6 +2,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:pagosapp_group/src/pages/main_page.dart';
 import 'package:intl/intl.dart';
+import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 
 //import 'package:provider/provider.dart';
 
@@ -22,151 +23,160 @@ class PagoPage extends StatelessWidget {
             },
         ),),
       
-      body: Container(
-        child: Center(
-          child: Center(
-            child: ListView(
-              children: <Widget>[
-              
-                SizedBox(height: 20),
-                Image.asset(
-                  'assets/images/icono_pago.png',
-                  height: 200,
-                ),
-                SizedBox(height: 30),
-                titulo(context),
-                SizedBox(height: 20),
-                user(context),
-                SizedBox(height: 20),
-                descripcion(context),
-                SizedBox(height: 20),
-                monto(context),
-                SizedBox(height: 20),
-                inputBirth(context),
-                SizedBox(height: 20),
-                ubicacion(context),
-                SizedBox(height: 20),
-                tipoPago(context),
-                SizedBox(height: 20),
-                boton(context)
-              ],
-            ),
+      body:SingleChildScrollView(
+        child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+              Standard.getBackground(context),
+              Column(
+                children: [
+                  SizedBox(height: 40.0),
+                     ClipOval(child: Image.asset('assets/images/icono_pago.png',height: 100,)),  
+                
+                  Standard.TitleToForm(context, "Registro Pago"),
+                  _form(context)
+                ],
+              )
+            ],
           ),
-        ),
-      ),
-    );
+      ));
   }
 }
+_form(context){
+      final size = MediaQuery.of(context).size;
+    return Container(
+      
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              width: size.width * .90,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: Theme.of(context).dividerColor)),
+              child: Form(
+                  //key: formKey,
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 5, horizontal: 5.0),
+                    child: Column(
+                      children: [
+                       
+                
+                  user(context),
+                 SizedBox(height: 10),
+                  descripcion(context),
+             SizedBox(height: 10),
+                  monto(context),
+                 SizedBox(height: 10),
+                  inputBirth(context),
+                SizedBox(height: 10),
+                  ubicacion(context),
+                SizedBox(height: 10),
+                  tipoPago(context),
+               SizedBox(height: 10),
+                  boton(context)
+                      ],
+                    ),
+                  )),
+            )
+          ],
+        ),
+      
 
-Widget titulo(context) {
-  return Container(
-    child: Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Agregar Pago",
-            style: Theme.of(context).textTheme.headline2),
-          
-        ],
-      ),
-    ),
-  );
+    );
+
 }
 
-Widget user(context) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    child: TextField(
-      decoration: InputDecoration(
-         suffixIcon: Icon(Icons.person),
+
+Widget user(context){
+    return TextFormField(
+      //  initialValue: _treatment.diagnostic,
+        onSaved: (value) {
+          //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+          //_treatment.diagnostic = value.toString();
+        },
+        validator: (value) {
+          if (value!.length < 10) {
+            return "Debe ingresar un mensaje con al menos 10 caracteres";
+          } else {
+            return null; //Validación se cumple al retorna null
+          }
+        },
+        decoration: InputDecoration(labelText: "Nombre", suffixIcon: Icon(Icons.add_comment_outlined ),
         border: OutlineInputBorder(
+          
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
-        ),
-        hintText: "Nombre",
-        hintStyle: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
-      ),
-    ),
-  );
-}
+        ),),
+        );
+  }
 
 Widget descripcion(context) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    child: TextField(
-      style: TextStyle(color: Colors.blueGrey),
-      decoration: InputDecoration(
-         suffixIcon: Icon(Icons.add_comment_outlined ),
-        border: OutlineInputBorder(
+    return TextFormField(
+      //  initialValue: _treatment.diagnostic,
+        onSaved: (value) {
+          //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+          //_treatment.diagnostic = value.toString();
+        },
+        validator: (value) {
+          if (value!.length < 10) {
+            return "Debe ingresar un mensaje con al menos 10 caracteres";
+          } else {
+            return null; //Validación se cumple al retorna null
+          }
+        },
+        decoration: InputDecoration(labelText: "Descripcion", suffixIcon: Icon(Icons.add_comment_outlined ),border: OutlineInputBorder(
+          
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
-        ),
-        hintText: "Descripcion",
-        hintStyle: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
-      ),
-    ),
-  );
-}
+        ),),
+    );
+  }
 
 Widget monto(context) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    child: TextField(
+  return  TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         suffixIcon: Icon(Icons.attach_money  ),
+        labelText: "Monto",
         border: OutlineInputBorder(
+          
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
-        hintText: "Monto",
-        hintStyle: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
-      ),
-    ),
+        ),
+       
+    
+    
   );
 }
  Widget inputBirth(context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      child: DateTimeField(
-        
+    return  DateTimeField(
+      
         decoration: InputDecoration(
           suffixIcon: Icon(Icons.date_range),
+          labelText: "Fecha",
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
-          ),
-          hintText: "Fecha de Pago",
-          hintStyle: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).accentColor),
-          fillColor: Colors.white,
-          filled: true,
+          
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
+        ),
+
         ),
         format: DateFormat("dd/MMM/yyyy"),
         onShowPicker: (context, currentValue) {
@@ -176,16 +186,15 @@ Widget monto(context) {
               initialDate: currentValue ?? DateTime.now(),
               lastDate: DateTime(2100));
         },
-      ),
+      
     );
   }
 
 Widget ubicacion(context) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    child: TextField(
+  return  TextFormField(
       decoration: InputDecoration(
         suffixIcon: Icon(Icons.where_to_vote_outlined ),
+        labelText: "Ubicacion", 
         border: OutlineInputBorder(
           
           borderSide: BorderSide.none,
@@ -194,23 +203,17 @@ Widget ubicacion(context) {
         focusedBorder: OutlineInputBorder(
           borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
-        hintText: "Ubicacion",
-        hintStyle: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
+       
       ),
-    ),
+    
   );
 }
 
 Widget tipoPago(context) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-    child: TextField(
+  return  TextFormField(
       decoration: InputDecoration(
          suffixIcon: Icon(Icons.vignette_outlined ),
+           labelText: "Tipo de Pago", 
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(5),
@@ -218,14 +221,9 @@ Widget tipoPago(context) {
         focusedBorder: OutlineInputBorder(
           borderSide:  BorderSide(color: Theme.of(context).accentColor,width: 3.0),
         ),
-        hintText: "Tipo de Pago",
-        hintStyle: TextStyle(
-            fontWeight: FontWeight.w700,
-            color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
+        
       ),
-    ),
+  
   );
 }
 
