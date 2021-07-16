@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/services/payment_service.dart';
+import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/pages/pago_form.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
@@ -20,11 +22,14 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
   ];
 
   late TabController _tabController;
+  PaymentService _service = new PaymentService();
+  List<Payment>? _paymentList = null;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);
+    _loadPayment();
   }
 
   @override
@@ -36,48 +41,75 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TabBar(
-        labelColor: Theme.of(context).primaryColor,
-        controller: _tabController,
-        tabs: myTabs,
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [_detail(), _payments()],
-      ),
-    );
+        appBar: TabBar(
+          labelColor: Theme.of(context).primaryColor,
+          controller: _tabController,
+          tabs: myTabs,
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [_detail(), _payments()],
+        ),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Tooltip(
+              message: "Agregar tratamiento",
+              child: ElevatedButton(
+                style: Standard.buttonStandardStyle(context),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaymentForm(
+                            idperson: widget.person.idperson.toString()),
+                      ));
+                },
+                child: const Icon(Icons.add),
+              ),
+            ),
+            Tooltip(
+              message: "Recargar lista",
+              child: ElevatedButton(
+                style: Standard.buttonStandardStyle(context),
+                onPressed: () => _loadPayment(),
+                child: const Icon(Icons.arrow_circle_down),
+              ),
+            ),
+          ],
+        ));
   }
 
-  _detail() {
+  _loadPayment() {
+    _service.getPayament(widget.person.idperson.toString()).then((value) {
+      _paymentList = value;
+      setState(() {});
+    });
+  }
+
+  /* _detail() {
     return Column(
       children: [],
     );
   }
+*/
+  _detail() {
+    return Container(
+      margin: EdgeInsets.all(14.0),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Standard.getInfoLine(context, "Ciudad",
+                widget.person.biography.toString(), Icons.location_city),
+          ],
+        ),
+      ),
+    );
+  }
 
   _payments() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14.0),
-          child: Tooltip(
-            message: "Agregar nuevo",
-            child: ElevatedButton(
-              onPressed: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PagoPage(),
-                    ))
-              },
-              child: Icon(Icons.add_circle_rounded),
-              style: Standard.BtnStyle(context),
-            ),
-          ),
-        ),
-        Expanded(
-            child: SingleChildScrollView(
-                child: PaymentsList(idperson: "IT3P9wP2ph065ese9ExW")))
-      ],
-    );
+    return SingleChildScrollView(
+        child: PaymentsList(payments: _paymentList, person: widget.person));
   }
 }

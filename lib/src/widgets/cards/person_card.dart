@@ -8,27 +8,28 @@ class PersonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        elevation: 5.0,
         child: ListTile(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PersonPage(person: currentPerson),
-            ));
-      },
-      title: Text(currentPerson.name,
-          style: Theme.of(context).textTheme.headline6),
-      subtitle: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text((currentPerson.biography),
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                color: Theme.of(context).accentColor,
-                fontWeight: FontWeight.bold)),
-      ),
-      leading: ClipOval(
-          child: currentPerson.photo == null
-              ? Image.asset("images/icono_user.png")
-              : Image.network(currentPerson.photo.toString())),
-    ));
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PersonPage(person: currentPerson),
+                ));
+          },
+          title: Text(currentPerson.name,
+              style: Theme.of(context).textTheme.headline6),
+          subtitle: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text((currentPerson.biography),
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.bold)),
+          ),
+          leading: ClipOval(
+              child: currentPerson.photo == null
+                  ? Image.asset("assets/images/icono_user.png")
+                  : Image.network(currentPerson.photo.toString())),
+        ));
   }
 }

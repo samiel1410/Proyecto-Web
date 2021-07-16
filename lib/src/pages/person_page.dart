@@ -46,9 +46,10 @@ class _PersonPageState extends State<PersonPage> {
                       color: Theme.of(context).canvasColor),
                   child: ClipOval(
                       child: widget.person.photo == null
-                          ? Image.asset("images/user.png")
+                          ? Image.asset("assets/images/icono_user.png")
                           : FadeInImage(
-                              placeholder: AssetImage('images/user.png'),
+                              placeholder:
+                                  AssetImage('assets/images/icono_user.png'),
                               image: NetworkImage(
                                   widget.person.photo.toString()))),
                 ),

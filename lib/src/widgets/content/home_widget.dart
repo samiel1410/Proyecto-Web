@@ -55,7 +55,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             )
           ]),
           //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
-          PaymentsList1()
+          //PaymentsList1()
         ],
       ),
     );
