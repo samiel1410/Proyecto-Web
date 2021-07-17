@@ -9,8 +9,7 @@ import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';
 //mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
 
 class HomeWidget extends StatefulWidget {
-  HomeWidget({Key? key }) : super(key: key);
-  
+  HomeWidget({Key? key}) : super(key: key);
 
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
@@ -34,29 +33,29 @@ class _HomeWidgetState extends State<HomeWidget> {
           SizedBox(
             height: 20.0,
           ),
-           Row( mainAxisAlignment:MainAxisAlignment.spaceAround,
-              children:[Text("Pagos Pendientes",
-              style: Theme.of(context).textTheme.headline5),RaisedButton(
-    child: Icon(Icons.add),
-    onPressed: () {
-      showAboutDialog(
-        context: context,
-        applicationIcon: FlutterLogo(),
-        applicationName: 'Woolha.com App',
-        applicationVersion: '0.0.1',
-        applicationLegalese: '©2020 Woolha.com',
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 15),
-            child: Text('This is an about dialog in Flutter')
-          )
-        ],
-      );
-    },
-  )]),
-      PaymentsList1()
-         
-          
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            Text("Pagos Pendientes",
+                style: Theme.of(context).textTheme.headline5),
+            RaisedButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                showAboutDialog(
+                  context: context,
+                  applicationIcon: FlutterLogo(),
+                  applicationName: 'Woolha.com App',
+                  applicationVersion: '0.0.1',
+                  applicationLegalese: '©2020 Woolha.com',
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.only(top: 15),
+                        child: Text('This is an about dialog in Flutter'))
+                  ],
+                );
+              },
+            )
+          ]),
+          //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
+          //PaymentsList1()
         ],
       ),
     );

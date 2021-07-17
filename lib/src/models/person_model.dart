@@ -13,7 +13,7 @@ String personToJson(Person data) => json.encode(data.toJson());
 
 class Person {
   Person({
-    required this.idperson,
+    this.idperson,
     required this.name,
     required this.biography,
     this.photo,
@@ -22,7 +22,7 @@ class Person {
   });
 
   String name;
-  String idperson;
+  String? idperson;
   String biography;
   String? photo;
   List<Tarjeta>? cards;
