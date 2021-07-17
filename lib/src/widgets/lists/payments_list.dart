@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pagosapp_group/services/payment_service.dart';
 import 'package:pagosapp_group/services/payment_type_service.dart';
 import 'package:pagosapp_group/src/models/payment_model.dart';
-import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
+import 'package:pagosapp_group/src/widgets/cards/paymets1_card.dart';
 
 class PaymentsList extends StatefulWidget {
   const PaymentsList({Key? key, required this.idperson}) : super(key: key);
