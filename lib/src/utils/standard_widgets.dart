@@ -27,7 +27,7 @@ class Standard {
           width: double.infinity,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: ExactAssetImage("images/background.png"),
+                  image: ExactAssetImage("assets/images/background.png"),
                   repeat: ImageRepeat.repeat),
               gradient: LinearGradient(colors: [
                 Theme.of(context).primaryColor,

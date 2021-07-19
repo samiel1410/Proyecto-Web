@@ -1,10 +1,10 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/models/person_model.dart';
+/*import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
 import 'package:pagosapp_group/src/widgets/lists/cards_list.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
-import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';
+import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';*/
 
 //mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
 
