@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:pagosapp_group/services/payment_service.dart';
-import 'package:pagosapp_group/services/payment_type_service.dart';
+
 import 'package:pagosapp_group/src/models/payment_model.dart';
-<<<<<<< HEAD
-import 'package:pagosapp_group/src/widgets/cards/paymets1_card.dart';
-=======
 import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
->>>>>>> 816d4971aca01ea073856b66ae27d274212f1c82
 
 class PaymentsList extends StatelessWidget {
   const PaymentsList({Key? key, required this.payments, required this.person})

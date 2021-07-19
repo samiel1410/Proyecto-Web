@@ -39,6 +39,7 @@ dependencies:
   date_time_picker: ^2.1.0
   intl: ^0.17.0
   datetime_picker_formfield: ^2.0.0
+  flutter_holo_date_picker: ^1.0.0-nullsafety.3 
   time_formatter: ^1.0.0+5 
 
 dev_dependencies:

@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 
 Person personFromJson(String str) => Person.fromJson(json.decode(str));

@@ -18,6 +18,8 @@ class Payment {
       required this.typePage,
       required this.date,
       required this.idperson});
+  
+   Payment.create(this.title, this.description,this.amount, this.idperson, this.date, this.address , this.typePage);
 
   String? idpayment;
   String title;
@@ -27,6 +29,7 @@ class Payment {
   String typePage;
   DateTime date;
   String idperson;
+
   factory Payment.fromJson(Map<String, dynamic> json) => Payment(
       idpayment: json["idpayment"],
       title: json["title"],

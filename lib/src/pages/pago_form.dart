@@ -1,27 +1,58 @@
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/pages/main_page.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:pagosapp_group/services/card_service.dart';
+import 'package:pagosapp_group/services/payment_service.dart';
+import 'package:pagosapp_group/services/payment_type_service.dart';
+import 'package:pagosapp_group/src/models/payment_model.dart';
+import 'package:pagosapp_group/src/models/payment_type_model.dart';
+import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
+
 
 //import 'package:provider/provider.dart';
 
-class PaymentForm extends StatelessWidget {
+class PaymentForm extends StatefulWidget {
   const PaymentForm({Key? key, required this.idperson}) : super(key: key);
   final String idperson;
+  
 
+  @override
+  _PaymentFormState createState() => _PaymentFormState();
+}
+
+class _PaymentFormState extends State<PaymentForm> {
+  //Clave para vincular el Formulario (Form)
+  final formKey = GlobalKey<FormState>();
+
+  PaymentTypeService _serviceTypePayment= new PaymentTypeService();
+  PaymentService _servicePayment = new PaymentService();
+  CardService _cardService = new CardService();
+  List<PaymentType> _types = [];
+  List<Tarjeta> _cards = [];
+  DateTime _selectedDate = DateTime.now();
+  List<Widget> _unidos=[];
+
+  //Un objeto del modelo a enviar
+  late Payment _payment;
+ 
+  bool _onSaving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTypePayments();
+    _loadCards();
+ 
+    _payment = Payment.create(
+        "", "", "",widget.idperson, _selectedDate, "" , "Efectivo");
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_outlined),
-            onPressed: () => {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MainPage()))
-            },
-          ),
-        ),
+        appBar: Standard.appBar(context, "Nuevo Pago"),
         body: SingleChildScrollView(
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
@@ -29,23 +60,22 @@ class PaymentForm extends StatelessWidget {
               Standard.getBackground(context),
               Column(
                 children: [
-                  SizedBox(height: 40.0),
-                  ClipOval(
-                      child: Image.asset(
-                    'assets/images/icono_pago.png',
-                    height: 100,
-                  )),
-                  Standard.TitleToForm(context, "Registro Pago"),
-                  _form(context)
+                  SizedBox(height: 35.0),
+                  SizedBox(
+                    height: 120.0,
+                    child: Image.asset("assets/images/" +
+                        Standard.getFisioImage(_payment.typePage) +
+                        ".png"),
+                  ),
+                  Standard.titleToForm(context, "Registro de Pago"),
+                  _form()
                 ],
               )
             ],
           ),
         ));
   }
-}
-
-_form(context) {
+  _form() {
   final size = MediaQuery.of(context).size;
   return Container(
     child: Column(
@@ -59,24 +89,29 @@ _form(context) {
               borderRadius: BorderRadius.circular(10.0),
               border: Border.all(color: Theme.of(context).dividerColor)),
           child: Form(
-              //key: formKey,
+              key: formKey,
               child: Container(
             margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5.0),
             child: Column(
               children: [
-                user(context),
+                  _tipoPago(),
+                   SizedBox(height: 10),
+                _user(),
                 SizedBox(height: 10),
-                descripcion(context),
+                _descripcion(),
                 SizedBox(height: 10),
-                monto(context),
+          
+                _payment.typePage == "Tarjeta" ?
+                _monto() 
+                : _monto(),
                 SizedBox(height: 10),
-                inputBirth(context),
+                _inputBirth(),
                 SizedBox(height: 10),
-                ubicacion(context),
+                _ubicacion(),
+               
+        
                 SizedBox(height: 10),
-                tipoPago(context),
-                SizedBox(height: 10),
-                boton(context)
+                _boton()
               ],
             ),
           )),
@@ -86,15 +121,15 @@ _form(context) {
   );
 }
 
-Widget user(context) {
+_user() {
   return TextFormField(
-    //  initialValue: _treatment.diagnostic,
+    initialValue: _payment.title,
     onSaved: (value) {
       //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      //_treatment.diagnostic = value.toString();
+      _payment.title = value.toString();
     },
     validator: (value) {
-      if (value!.length < 10) {
+      if (value!.length < 5) {
         return "Debe ingresar un mensaje con al menos 10 caracteres";
       } else {
         return null; //Validación se cumple al retorna null
@@ -115,16 +150,16 @@ Widget user(context) {
   );
 }
 
-Widget descripcion(context) {
+_descripcion() {
   return TextFormField(
-    //  initialValue: _treatment.diagnostic,
+     initialValue: _payment.description,
     onSaved: (value) {
       //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      //_treatment.diagnostic = value.toString();
+      _payment.description = value.toString();
     },
     validator: (value) {
-      if (value!.length < 10) {
-        return "Debe ingresar un mensaje con al menos 10 caracteres";
+      if (value!.length < 15) {
+        return "Debe ingresar un mensaje con al menos 15 caracteres";
       } else {
         return null; //Validación se cumple al retorna null
       }
@@ -144,8 +179,23 @@ Widget descripcion(context) {
   );
 }
 
-Widget monto(context) {
+_monto1(){
   return TextFormField(
+    initialValue: _payment.amount,
+    onSaved: (value) {
+      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+      _payment.amount = value.toString();
+    },
+  
+   
+    validator: (value) {
+      if (value!.length < 1) {
+        return "Debe ingresar un mensaje con al menos 1 caracteres";
+      } else {
+        return null; //Validación se cumple al retorna null
+      }
+    },
+    
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       suffixIcon: Icon(Icons.attach_money),
@@ -156,39 +206,142 @@ Widget monto(context) {
       ),
       focusedBorder: OutlineInputBorder(
         borderSide:
+        
             BorderSide(color: Theme.of(context).accentColor, width: 3.0),
       ),
-    ),
-  );
-}
+    ),);
 
-Widget inputBirth(context) {
-  return DateTimeField(
+}
+_monto() {
+  return _payment.typePage == "Efectivo"
+    ?TextFormField(
+    initialValue: _payment.amount,
+    onSaved: (value) {
+      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+      _payment.amount = value.toString();
+    },
+  
+    validator: (value) {
+      if (value!.length < 1) {
+        return "Debe ingresar un mensaje con al menos 1 caracteres";
+      } else {
+        return null; //Validación se cumple al retorna null
+      }
+    },
+    
+    keyboardType: TextInputType.number,
     decoration: InputDecoration(
-      suffixIcon: Icon(Icons.date_range),
-      labelText: "Fecha",
+      suffixIcon: Icon(Icons.attach_money),
+      labelText: "Monto",
       border: OutlineInputBorder(
         borderSide: BorderSide.none,
         borderRadius: BorderRadius.circular(5),
       ),
       focusedBorder: OutlineInputBorder(
         borderSide:
+        
             BorderSide(color: Theme.of(context).accentColor, width: 3.0),
       ),
     ),
-    format: DateFormat("dd/MMM/yyyy"),
-    onShowPicker: (context, currentValue) {
-      return showDatePicker(
-          context: context,
-          firstDate: DateTime(1900),
-          initialDate: currentValue ?? DateTime.now(),
-          lastDate: DateTime(2100));
+  )
+    : _payment.typePage == "Tarjeta"?
+     DropdownButton<String>(
+
+      value: _cards[1].name,
+      icon: const Icon(Icons.expand_more),
+      iconSize: 24,
+      elevation: 16,
+      isExpanded: true,
+      underline: Container(
+        height: 2,
+        color: Theme.of(context).dividerColor,
+      ),
+      onChanged: (String? newValue) {
+        setState(() {
+          
+          _payment.typePage = newValue!;
+        });
+      },
+      
+      items: _cards.map<DropdownMenuItem<String>>((Tarjeta value) {
+        return DropdownMenuItem<String>(
+          value: value.name,
+          child: Text(value.name),
+        );
+      }).toList(),
+    )
+  :TextFormField(
+    initialValue: _payment.amount,
+    onSaved: (value) {
+      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+      _payment.amount = value.toString();
     },
-  );
+  
+   
+    validator: (value) {
+      if (value!.length < 1) {
+        return "Debe ingresar un mensaje con al menos 1 caracteres";
+      } else {
+        return null; //Validación se cumple al retorna null
+      }
+    },
+    
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+      suffixIcon: Icon(Icons.attach_money),
+      labelText: "Monto",
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+        
+            BorderSide(color: Theme.of(context).accentColor, width: 3.0),
+      ),
+    ),);
 }
 
-Widget ubicacion(context) {
+
+_inputBirth() {
+  return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Fecha de inicio", style: Theme.of(context).textTheme.subtitle1),
+          DatePickerWidget(
+            looping: false, // default is not looping
+            dateFormat: "dd-MMMM-yyyy",
+            locale: DatePicker.localeFromString('es'),
+            onChange: (DateTime newDate, _) {
+              _selectedDate = newDate;
+              _payment.date = _selectedDate;
+            },
+            pickerTheme: DateTimePickerTheme(
+              backgroundColor: Theme.of(context).canvasColor,
+              itemTextStyle: TextStyle(color: Theme.of(context).primaryColor),
+              dividerColor: Theme.of(context).disabledColor,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+_ubicacion() {
   return TextFormField(
+      initialValue: _payment.address,
+    onSaved: (value) {
+      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+      _payment.address = value.toString();
+    },
+    validator: (value) {
+      if (value!.length < 5) {
+        return "Debe ingresar un mensaje con al menos 5 caracteres";
+      } else {
+        return null; //Validación se cumple al retorna null
+      }
+    },
     decoration: InputDecoration(
       suffixIcon: Icon(Icons.where_to_vote_outlined),
       labelText: "Ubicacion",
@@ -204,38 +357,80 @@ Widget ubicacion(context) {
   );
 }
 
-Widget tipoPago(context) {
-  return TextFormField(
-    decoration: InputDecoration(
-      suffixIcon: Icon(Icons.vignette_outlined),
-      labelText: "Tipo de Pago",
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(5),
+_tipoPago() {
+  return  DropdownButton<String>(
+      
+      value: _payment.typePage,
+      icon: const Icon(Icons.expand_more),
+      iconSize: 24,
+      elevation: 16,
+      isExpanded: true,
+      underline: Container(
+        height: 2,
+        color: Theme.of(context).dividerColor,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderSide:
-            BorderSide(color: Theme.of(context).accentColor, width: 3.0),
-      ),
-    ),
-  );
-}
+      onChanged: (String? newValue) {
+        setState(() {
+          _payment.typePage = newValue!;
+      
+        });
+      },
+      items: _types.map<DropdownMenuItem<String>>((PaymentType value) {
+        return DropdownMenuItem<String>(
+          
+          value: value.name,
+        
+          child: Text(value.name),
+        );
+      }).toList(),
+    );
+  }
 
-Widget boton(context) {
-  return Container(
-    child: MaterialButton(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          side: BorderSide(color: Colors.black)),
-      minWidth: 10.0,
-      height: 50.0,
-      onPressed: () {},
-      color: Theme.of(context).accentColor,
-      child: Text('Agregar',
-          style: Theme.of(context)
-              .textTheme
-              .headline5!
-              .copyWith(fontWeight: FontWeight.bold)),
-    ),
-  );
+_boton() {
+  return _onSaving
+        ? Container(
+            height: 50.0,
+            width: 50.0,
+            child: Center(child: CircularProgressIndicator()))
+        : Tooltip(
+            message: "Guardar",
+            child: ElevatedButton(
+              onPressed: () {
+                _sendForm();
+                _onSaving = true;
+                setState(() {});
+              },
+              child: Icon(Icons.save),
+              style: Standard.buttonStandardStyle(context),
+            ),
+          );
+  }
+
+   _sendForm() async {
+    if (!formKey.currentState!.validate()) return;
+
+    //Vincula el valor de las controles del formulario a los atributos del modelo
+    formKey.currentState!.save();
+
+    //Llamamos al servicio para guardar el reporte
+    _servicePayment.sendPayment(_payment).then((value) {
+      formKey.currentState!.reset();
+      Navigator.pop(context);
+    });
+  }
+
+  _loadTypePayments() {
+    _serviceTypePayment.getTypes().then((value) {
+      _types = value;
+      setState(() {});
+    });
+  }
+
+   _loadCards() {
+    _cardService.getCard(widget.idperson).then((value) {
+      _cards = value;
+      setState(() {});
+    });
+  }
+
 }

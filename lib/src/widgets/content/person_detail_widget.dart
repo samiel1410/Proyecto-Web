@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/services/card_service.dart';
 import 'package:pagosapp_group/services/payment_service.dart';
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
+import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 import 'package:pagosapp_group/src/pages/pago_form.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
@@ -23,13 +25,16 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
 
   late TabController _tabController;
   PaymentService _service = new PaymentService();
+  CardService _serviceCard = new CardService();
   List<Payment>? _paymentList = null;
+  List<Tarjeta>? _cardList = null;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);
     _loadPayment();
+  
   }
 
   @override
@@ -54,7 +59,7 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Tooltip(
-              message: "Agregar tratamiento",
+              message: "Agregar Pago",
               child: ElevatedButton(
                 style: Standard.buttonStandardStyle(context),
                 onPressed: () {
@@ -86,6 +91,8 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
       setState(() {});
     });
   }
+
+  
 
   /* _detail() {
     return Column(

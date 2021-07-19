@@ -27,7 +27,7 @@ class Standard {
           width: double.infinity,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: ExactAssetImage("images/background.png"),
+                  image: ExactAssetImage("assets/images/background.png"),
                   repeat: ImageRepeat.repeat),
               gradient: LinearGradient(colors: [
                 Theme.of(context).primaryColor,
@@ -43,6 +43,11 @@ class Standard {
       ],
     );
   }
+
+   static String getFisioImage(String type) {
+    return type.toLowerCase();
+  }
+
 
   static AppBar appBar(BuildContext context, String title) {
     return AppBar(title: Text(title));
@@ -107,6 +112,34 @@ class Standard {
       title: Text(title, style: Theme.of(context).textTheme.bodyText2),
       subtitle: Text(subtitle, style: Theme.of(context).textTheme.headline6),
     );
+  }
+
+  static Widget getStye(BuildContext  context, String title , int valor){
+    return TextFormField(
+    
+    validator: (value) {
+      if (value!.length < valor) {
+        return "Debe ingresar un mensaje con al menos $valor caracteres";
+      } else {
+        return null; //Validación se cumple al retorna null
+      }
+    },
+    
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+      suffixIcon: Icon(Icons.attach_money),
+      labelText: title,
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide:
+        
+            BorderSide(color: Theme.of(context).accentColor, width: 3.0),
+      ),
+    ),
+  );
   }
 
   static Widget getBoard(BuildContext context, String message, IconData icon) {

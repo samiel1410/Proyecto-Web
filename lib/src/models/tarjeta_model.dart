@@ -11,15 +11,21 @@ String tarjetaToJson(Tarjeta data) => json.encode(data.toJson());
 class Tarjeta {
     Tarjeta({
        required this.name,
+       required this.idperson
     });
 
     String name;
+    String idperson;
+
+    Tarjeta.create(this.name,this.idperson);
 
     factory Tarjeta.fromJson(Map<String, dynamic> json) => Tarjeta(
         name: json["name"],
+        idperson: json["idperson"],
     );
 
     Map<String, dynamic> toJson() => {
         "name": name,
+        "idperson": idperson,
     };
 }

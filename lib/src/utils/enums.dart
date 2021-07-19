@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/models/person_model.dart';
-import 'package:pagosapp_group/src/pages/perfil_page.dart';
-import 'package:pagosapp_group/src/pages/person_page.dart';
+
 import 'package:pagosapp_group/src/pages/tarjeta_form.dart';
-import 'package:pagosapp_group/src/pages/pago_form.dart';
+
 import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
 import 'package:pagosapp_group/src/widgets/content/person_widget.dart';
 

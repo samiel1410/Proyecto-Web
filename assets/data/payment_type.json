@@ -2,17 +2,17 @@
     {
         "name" : "Efectivo",
         "description" : "Pago por medio de billetes o monedas",
-        "imagen" : ""
+        "imagen" : "efectivo"
     },
     {
         "name" : "Cheque",
         "description" : "Se extiende un cheque certificado que se cambia por efectivo",
-        "imagen" : ""
+        "imagen" : "cheque"
     },
     {
         "name" : "Tarjeta",
         "description" : "Pago electrónico, la tarjeta puede ser de crédito o de débito",
-        "imagen" : ""
+        "imagen" : "tarjeta"
     },
     {
         "name" : "Pago en línea",

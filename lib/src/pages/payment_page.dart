@@ -13,7 +13,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Standard.appBar(context, payment.typePage),
+        appBar: Standard.appBar(context, payment.title),
         body: CustomScrollView(
           slivers: [
             _appBar(context),
@@ -48,7 +48,7 @@ class PaymentPage extends StatelessWidget {
                         ".png"),
                   ),*/
                 ),
-                Standard.titleToForm(context, payment.typePage)
+                Standard.titleToForm(context, payment.title)
               ]),
             ),
           ],

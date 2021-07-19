@@ -9,11 +9,11 @@ class CardService {
   CardService();
 
   //Future, indica que es una llama asíncrona
-  Future<List<Tarjeta>> getPayament() async {
+  Future<List<Tarjeta>> getCard(String idperson) async {
     List<Tarjeta> items = [];
     try {
       var uri = Uri.https(
-          "proyecto-5e4b9.web.app", "/api/cards/1/100");
+          "proyecto-5e4b9.web.app", "/api/cards/$idperson");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);

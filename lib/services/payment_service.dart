@@ -24,4 +24,22 @@ class PaymentService {
       return items;
     }
   }
+
+
+
+Future<dynamic> sendPayment(Payment payment) async {
+    try {
+      final Map<String, String> _headers = {"content-type": "application/json"};
+      var uri =
+          Uri.https("proyecto-5e4b9.web.app", "/api/payments");
+      final resp = await http.post(uri,
+          headers: _headers, body: paymentToJson(payment));
+      if (resp.body.isEmpty) return null;
+      return json.decode(resp.body);
+    } on Exception catch (e) {
+      print("Exception $e");
+      return null;
+    }
+  }
+
 }
