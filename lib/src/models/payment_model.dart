@@ -16,10 +16,13 @@ class Payment {
       required this.amount,
       required this.address,
       required this.typePage,
+      this.detailPay,
       required this.date,
-      required this.idperson});
+      required this.idperson,
+     
+      });
   
-   Payment.create(this.title, this.description,this.amount, this.idperson, this.date, this.address , this.typePage);
+   Payment.create(this.title, this.description,this.amount, this.idperson, this.date, this.address , this.typePage , this.detailPay);
 
   String? idpayment;
   String title;
@@ -27,8 +30,10 @@ class Payment {
   String amount;
   String address;
   String typePage;
+  String? detailPay;
   DateTime date;
   String idperson;
+  
 
   factory Payment.fromJson(Map<String, dynamic> json) => Payment(
       idpayment: json["idpayment"],
@@ -37,8 +42,10 @@ class Payment {
       amount: json["amount"],
       address: json["address"],
       typePage: json["typePage"],
+      detailPay: json["detailPay"],
       date: DateTime.parse(json["date"]),
       idperson: json["idperson"]);
+     
 
   Map<String, dynamic> toJson() => {
         "idpayment": idpayment,
@@ -47,8 +54,10 @@ class Payment {
         "amount": amount,
         "address": address,
         "typePage": typePage,
+        "detailPay": detailPay,
         "date":
             "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
         "idperson": idperson,
+         
       };
 }

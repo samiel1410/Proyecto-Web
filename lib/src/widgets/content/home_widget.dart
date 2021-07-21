@@ -32,6 +32,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             Text("Pagos Pendientes",
                 style: Theme.of(context).textTheme.headline5),
+            // ignore: deprecated_member_use
             RaisedButton(
               child: Icon(Icons.add),
               onPressed: () {

@@ -54,8 +54,8 @@ class _PaymentDetailsWidgetState extends State<PaymentDetailsWidget>
     return Container(
       margin: EdgeInsets.all(14.0),
       child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+        
           children: [
             Standard.getInfoLine(
                 context, "Title", widget.payment.title, Icons.person),

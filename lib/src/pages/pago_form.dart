@@ -31,10 +31,12 @@ class _PaymentFormState extends State<PaymentForm> {
   List<PaymentType> _types = [];
   List<Tarjeta> _cards = [];
   DateTime _selectedDate = DateTime.now();
-  List<Widget> _unidos=[];
+  bool _bolean = true;
 
   //Un objeto del modelo a enviar
   late Payment _payment;
+  
+  
  
   bool _onSaving = false;
 
@@ -45,7 +47,7 @@ class _PaymentFormState extends State<PaymentForm> {
     _loadCards();
  
     _payment = Payment.create(
-        "", "", "",widget.idperson, _selectedDate, "" , "Efectivo");
+        "", "", "",widget.idperson, _selectedDate, "" , "Efectivo" , "visa");
   }
 
   
@@ -77,6 +79,8 @@ class _PaymentFormState extends State<PaymentForm> {
   }
   _form() {
   final size = MediaQuery.of(context).size;
+  _cards.length == 0 ? _bolean = false : _bolean = true ;
+  
   return Container(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -94,22 +98,22 @@ class _PaymentFormState extends State<PaymentForm> {
             margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5.0),
             child: Column(
               children: [
-                  _tipoPago(),
+                
+                 _typePay(),
                    SizedBox(height: 10),
-                _user(),
+                titlePay(),
                 SizedBox(height: 10),
-                _descripcion(),
+                _description(),
                 SizedBox(height: 10),
-          
+                _monto(),
                 _payment.typePage == "Tarjeta" ?
-                _monto() 
-                : _monto(),
+                _detail()
+                : Container(),
                 SizedBox(height: 10),
-                _inputBirth(),
+                _dateOfPage(),
                 SizedBox(height: 10),
                 _ubicacion(),
                
-        
                 SizedBox(height: 10),
                 _boton()
               ],
@@ -121,7 +125,7 @@ class _PaymentFormState extends State<PaymentForm> {
   );
 }
 
-_user() {
+titlePay() {
   return TextFormField(
     initialValue: _payment.title,
     onSaved: (value) {
@@ -135,6 +139,7 @@ _user() {
         return null; //Validación se cumple al retorna null
       }
     },
+    enabled: _bolean,
     decoration: InputDecoration(
       labelText: "Nombre",
       suffixIcon: Icon(Icons.add_comment_outlined),
@@ -150,7 +155,7 @@ _user() {
   );
 }
 
-_descripcion() {
+_description() {
   return TextFormField(
      initialValue: _payment.description,
     onSaved: (value) {
@@ -164,6 +169,7 @@ _descripcion() {
         return null; //Validación se cumple al retorna null
       }
     },
+      enabled: _bolean,
     decoration: InputDecoration(
       labelText: "Descripcion",
       suffixIcon: Icon(Icons.add_comment_outlined),
@@ -179,7 +185,44 @@ _descripcion() {
   );
 }
 
-_monto1(){
+
+_detail(){
+  
+  return   _payment.typePage == "Tarjeta" && _cards.length == 0 ?
+  Container(child: Text("No contiene tarjetas"),)
+
+  :_payment.typePage == "Tarjeta" && _cards.length != 0 ?
+  
+ DropdownButton<String>(
+
+      value: _payment.detailPay,
+      
+      icon: const Icon(Icons.expand_more),
+      iconSize: 24,
+      elevation: 16,
+      isExpanded: true,
+      underline: Container(
+        height: 2,
+        color: Theme.of(context).dividerColor,
+      ),
+      onChanged: (String? newValue ) { 
+        setState(() { 
+         _payment.detailPay = newValue!;
+         print(newValue);
+        
+        });
+      },
+      
+      items: _cards.map<DropdownMenuItem<String>>((Tarjeta value) {
+        return DropdownMenuItem<String>(
+          value: value.name,
+          child: Text(value.name),
+        );
+      }).toList(),
+    ) : Container();
+
+}
+_monto() {
   return TextFormField(
     initialValue: _payment.amount,
     onSaved: (value) {
@@ -187,7 +230,6 @@ _monto1(){
       _payment.amount = value.toString();
     },
   
-   
     validator: (value) {
       if (value!.length < 1) {
         return "Debe ingresar un mensaje con al menos 1 caracteres";
@@ -195,40 +237,7 @@ _monto1(){
         return null; //Validación se cumple al retorna null
       }
     },
-    
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-      suffixIcon: Icon(Icons.attach_money),
-      labelText: "Monto",
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide:
-        
-            BorderSide(color: Theme.of(context).accentColor, width: 3.0),
-      ),
-    ),);
-
-}
-_monto() {
-  return _payment.typePage == "Efectivo"
-    ?TextFormField(
-    initialValue: _payment.amount,
-    onSaved: (value) {
-      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _payment.amount = value.toString();
-    },
-  
-    validator: (value) {
-      if (value!.length < 1) {
-        return "Debe ingresar un mensaje con al menos 1 caracteres";
-      } else {
-        return null; //Validación se cumple al retorna null
-      }
-    },
-    
+      enabled: _bolean,
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       suffixIcon: Icon(Icons.attach_money),
@@ -243,67 +252,12 @@ _monto() {
             BorderSide(color: Theme.of(context).accentColor, width: 3.0),
       ),
     ),
-  )
-    : _payment.typePage == "Tarjeta"?
-     DropdownButton<String>(
-
-      value: _cards[1].name,
-      icon: const Icon(Icons.expand_more),
-      iconSize: 24,
-      elevation: 16,
-      isExpanded: true,
-      underline: Container(
-        height: 2,
-        color: Theme.of(context).dividerColor,
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          
-          _payment.typePage = newValue!;
-        });
-      },
-      
-      items: _cards.map<DropdownMenuItem<String>>((Tarjeta value) {
-        return DropdownMenuItem<String>(
-          value: value.name,
-          child: Text(value.name),
-        );
-      }).toList(),
-    )
-  :TextFormField(
-    initialValue: _payment.amount,
-    onSaved: (value) {
-      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _payment.amount = value.toString();
-    },
+  );
   
-   
-    validator: (value) {
-      if (value!.length < 1) {
-        return "Debe ingresar un mensaje con al menos 1 caracteres";
-      } else {
-        return null; //Validación se cumple al retorna null
-      }
-    },
-    
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-      suffixIcon: Icon(Icons.attach_money),
-      labelText: "Monto",
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide:
-        
-            BorderSide(color: Theme.of(context).accentColor, width: 3.0),
-      ),
-    ),);
+  
 }
 
-
-_inputBirth() {
+_dateOfPage() {
   return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -313,11 +267,13 @@ _inputBirth() {
             looping: false, // default is not looping
             dateFormat: "dd-MMMM-yyyy",
             locale: DatePicker.localeFromString('es'),
+            
             onChange: (DateTime newDate, _) {
               _selectedDate = newDate;
               _payment.date = _selectedDate;
             },
             pickerTheme: DateTimePickerTheme(
+              
               backgroundColor: Theme.of(context).canvasColor,
               itemTextStyle: TextStyle(color: Theme.of(context).primaryColor),
               dividerColor: Theme.of(context).disabledColor,
@@ -342,6 +298,7 @@ _ubicacion() {
         return null; //Validación se cumple al retorna null
       }
     },
+    
     decoration: InputDecoration(
       suffixIcon: Icon(Icons.where_to_vote_outlined),
       labelText: "Ubicacion",
@@ -357,7 +314,7 @@ _ubicacion() {
   );
 }
 
-_tipoPago() {
+_typePay() {
   return  DropdownButton<String>(
       
       value: _payment.typePage,
@@ -372,14 +329,11 @@ _tipoPago() {
       onChanged: (String? newValue) {
         setState(() {
           _payment.typePage = newValue!;
-      
         });
       },
       items: _types.map<DropdownMenuItem<String>>((PaymentType value) {
         return DropdownMenuItem<String>(
-          
           value: value.name,
-        
           child: Text(value.name),
         );
       }).toList(),
@@ -429,6 +383,7 @@ _boton() {
    _loadCards() {
     _cardService.getCard(widget.idperson).then((value) {
       _cards = value;
+  
       setState(() {});
     });
   }

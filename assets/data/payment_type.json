@@ -13,15 +13,6 @@
         "name" : "Tarjeta",
         "description" : "Pago electrónico, la tarjeta puede ser de crédito o de débito",
         "imagen" : "tarjeta"
-    },
-    {
-        "name" : "Pago en línea",
-        "description" : "Empresas son intermediarios entre el cliente y el vendedor en el pago y cobro",
-        "imagen" : ""
-    },
-    {
-        "name" : "Moneda Virtual",
-        "description" : "Moneda que solo exite de forma digital pero tiene su equivalencia con el dinero físico",
-        "imagen" : ""
     }
+    
 ]

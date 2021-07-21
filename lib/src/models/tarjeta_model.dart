@@ -17,8 +17,7 @@ class Tarjeta {
     String name;
     String idperson;
 
-    Tarjeta.create(this.name,this.idperson);
-
+    
     factory Tarjeta.fromJson(Map<String, dynamic> json) => Tarjeta(
         name: json["name"],
         idperson: json["idperson"],
