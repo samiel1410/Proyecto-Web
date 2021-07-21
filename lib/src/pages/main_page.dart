@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/src/pages/forms/check_form.dart';
+import 'package:pagosapp_group/src/pages/forms/check_form2.dart';
 //import 'package:pagosapp_group/src/pages/forms/check_form.dart';
 import 'package:pagosapp_group/src/pages/forms/person_form.dart';
 import 'package:pagosapp_group/src/utils/enums.dart';
@@ -31,7 +33,7 @@ class _MainPageState extends State<MainPage> {
                     context,
                     MaterialPageRoute(
                       //builder: (context) => Form(),
-                      builder: (context) => PersonForm(),
+                      builder: (context) => ChequeForm(),
                     ));
               },
               child: const Icon(Icons.add),

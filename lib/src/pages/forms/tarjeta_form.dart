@@ -29,11 +29,11 @@ class AddTarjeta extends StatelessWidget {
                 ),
                 ClipOval(
                     child: Image.asset(
-                  'assets/images/icono_tarjeta.png',
+                  'assets/images/cheque.png',
                   height: 100,
                 )),
-                Standard.titleToForm2(context, "Registro de Tarjeta"),
-                _form(context)
+                Standard.titleToForm2(context, "Cheques"),
+                //_form(context)
               ],
             )
           ],

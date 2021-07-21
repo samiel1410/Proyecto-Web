@@ -34,7 +34,7 @@ class _PersonFormState extends State<PersonForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Standard.appBar(context, "Nuevo aqui esta"),
+        appBar: Standard.appBar(context, "Nuevo Usuario"),
         body: SingleChildScrollView(
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
