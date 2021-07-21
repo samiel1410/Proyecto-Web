@@ -1,5 +1,7 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
+//import 'package:pagosapp_group/src/pages/forms/check_form.dart';
+import 'package:pagosapp_group/src/pages/forms/person_form.dart';
 /*import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
 import 'package:pagosapp_group/src/widgets/lists/cards_list.dart';
@@ -39,18 +41,12 @@ class _HomeWidgetState extends State<HomeWidget> {
             RaisedButton(
               child: Icon(Icons.add),
               onPressed: () {
-                showAboutDialog(
-                  context: context,
-                  applicationIcon: FlutterLogo(),
-                  applicationName: 'Woolha.com App',
-                  applicationVersion: '0.0.1',
-                  applicationLegalese: '©2020 Woolha.com',
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(top: 15),
-                        child: Text('This is an about dialog in Flutter'))
-                  ],
-                );
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PersonForm(),
+                      //builder: (context) => PersonForm(),
+                    ));
               },
             )
           ]),

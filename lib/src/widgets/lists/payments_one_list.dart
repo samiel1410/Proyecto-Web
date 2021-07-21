@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/services/payment_service.dart';
+//import 'package:pagosapp_group/services/payment_service.dart';
 //import 'package:pagosapp_group/services/paymet1_service.dart';
 
-import 'package:pagosapp_group/src/models/payment_model.dart';
+//import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
 //import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
 
@@ -16,8 +16,8 @@ class PaymentsList1 extends StatefulWidget {
 }
 
 class _PaymentsListState extends State<PaymentsList1> {
-  PaymentService _service = PaymentService();
-  List<Payment> _payments = [];
+  /*PaymentService _service = PaymentService();
+  List<Payment> _payments = [];*/
   final Person? person = null;
 
   @override

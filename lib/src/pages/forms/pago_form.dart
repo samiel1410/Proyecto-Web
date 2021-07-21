@@ -35,7 +35,7 @@ class PaymentForm extends StatelessWidget {
                     'assets/images/icono_pago.png',
                     height: 100,
                   )),
-                  Standard.TitleToForm(context, "Registro Pago"),
+                  Standard.titleToForm2(context, "Registro Pago"),
                   _form(context)
                 ],
               )

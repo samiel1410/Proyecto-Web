@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/pages/person_form.dart';
+//import 'package:pagosapp_group/src/pages/forms/check_form.dart';
+import 'package:pagosapp_group/src/pages/forms/person_form.dart';
 import 'package:pagosapp_group/src/utils/enums.dart';
 //import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
 
@@ -29,6 +30,7 @@ class _MainPageState extends State<MainPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
+                      //builder: (context) => Form(),
                       builder: (context) => PersonForm(),
                     ));
               },

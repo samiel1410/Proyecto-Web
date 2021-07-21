@@ -53,7 +53,7 @@ class _PersonPageState extends State<PersonPage> {
                               image: NetworkImage(
                                   widget.person.photo.toString()))),
                 ),
-                Standard.TitleToForm(context, widget.person.name),
+                Standard.titleToForm(context, widget.person.name),
                 Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
                     child: Text((widget.person.biography),

@@ -3,9 +3,6 @@ import 'package:pagosapp_group/services/card_service.dart';
 import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/cards_card.dart';
 
-
-
-
 class CardList extends StatefulWidget {
   const CardList({Key? key}) : super(key: key);
 
@@ -20,26 +17,24 @@ class _CardListState extends State<CardList> {
   @override
   void initState() {
     super.initState();
-    _loadPayments();
+    // _loadPayments();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _cards.length == 0 ? Container(
-      child: Center(child: CircularProgressIndicator(),
-      ),
-    ):
-    Column(
-     
-        children:_cards.map((e) => TarjetaCard(tar: e)).toList()
-    
-    );
+    return _cards.length == 0
+        ? Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Column(children: _cards.map((e) => TarjetaCard(tar: e)).toList());
   }
 
-  _loadPayments() {
+  /*_loadPayments() {
     _service.getPayament().then((value) {
       _cards= value;
       setState(() {});
     });
-  }
+  }*/
 }

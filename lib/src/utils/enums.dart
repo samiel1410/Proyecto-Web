@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/src/pages/forms/check_form.dart';
+import 'package:pagosapp_group/src/pages/forms/person_form.dart';
 
-import 'package:pagosapp_group/src/pages/tarjeta_form.dart';
-import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
+import 'package:pagosapp_group/src/pages/forms/tarjeta_form.dart';
+//import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
 import 'package:pagosapp_group/src/widgets/content/person_widget.dart';
 
 class ItemMenu {
@@ -16,4 +18,4 @@ List<ItemMenu> menuOptions = [
   ItemMenu(Icons.account_circle_outlined, "Perfil"),
 ];
 
-List<Widget> contentWidget = [HomeWidget(), AddTarjeta(), PersonWidget()];
+List<Widget> contentWidget = [CheckForm(), AddTarjeta(), PersonWidget()];

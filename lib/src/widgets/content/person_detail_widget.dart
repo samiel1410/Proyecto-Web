@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pagosapp_group/services/payment_service.dart';
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
-import 'package:pagosapp_group/src/pages/pago_form.dart';
+import 'package:pagosapp_group/src/pages/forms/pago_form.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
 
