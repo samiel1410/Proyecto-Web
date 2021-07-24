@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/services/payment_service.dart';
+//import 'package:pagosapp_group/services/payment_service.dart';
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/pages/forms/pago_form.dart';
@@ -22,14 +22,14 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
   ];
 
   late TabController _tabController;
-  PaymentService _service = new PaymentService();
+  //PaymentService _service = new PaymentService();
   List<Payment>? _paymentList;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);
-    _loadPayment();
+    //_loadPayment();
   }
 
   @override
@@ -68,23 +68,8 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
                 child: const Icon(Icons.add),
               ),
             ),
-            Tooltip(
-              message: "Recargar lista",
-              child: ElevatedButton(
-                style: Standard.buttonStandardStyle(context),
-                onPressed: () => _loadPayment(),
-                child: const Icon(Icons.arrow_circle_down),
-              ),
-            ),
           ],
         ));
-  }
-
-  _loadPayment() {
-    _service.getPayament(widget.person.idperson.toString()).then((value) {
-      _paymentList = value;
-      setState(() {});
-    });
   }
 
   /* _detail() {
