@@ -1,7 +1,17 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pagosapp_group/src/pages/barras_page.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';
+=======
+//import 'package:pagosapp_group/src/pages/forms/check_form.dart';
+import 'package:pagosapp_group/src/pages/forms/person_form.dart';
+/*import 'package:pagosapp_group/src/models/person_model.dart';
+import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
+import 'package:pagosapp_group/src/widgets/lists/cards_list.dart';
+import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
+import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';*/
+>>>>>>> Diseño
 
 //mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
 
@@ -96,8 +106,22 @@ SingleTickerProviderStateMixin{
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             Text("Ingresos",
                 style: Theme.of(context).textTheme.headline5),
+<<<<<<< HEAD
             // ignore: deprecated_member_use
          
+=======
+            ElevatedButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PersonForm(),
+                      //builder: (context) => PersonForm(),
+                    ));
+              },
+            )
+>>>>>>> Diseño
           ]),
           //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
           PaymentsList1()

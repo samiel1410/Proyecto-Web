@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pagosapp_group/services/card_service.dart';
 import 'package:pagosapp_group/services/payment_service.dart';
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 import 'package:pagosapp_group/src/pages/pago_form.dart';
+=======
+//import 'package:pagosapp_group/services/payment_service.dart';
+import 'package:pagosapp_group/src/models/payment_model.dart';
+import 'package:pagosapp_group/src/models/person_model.dart';
+import 'package:pagosapp_group/src/pages/forms/pago_form.dart';
+>>>>>>> Diseño
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
 
@@ -24,17 +31,26 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
   ];
 
   late TabController _tabController;
+<<<<<<< HEAD
   PaymentService _service = new PaymentService();
   CardService _serviceCard = new CardService();
   List<Payment>? _paymentList = null;
   List<Tarjeta>? _cardList = null;
+=======
+  //PaymentService _service = new PaymentService();
+  List<Payment>? _paymentList;
+>>>>>>> Diseño
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);
+<<<<<<< HEAD
     _loadPayment();
   
+=======
+    //_loadPayment();
+>>>>>>> Diseño
   }
 
   @override
@@ -73,18 +89,11 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
                 child: const Icon(Icons.add),
               ),
             ),
-            Tooltip(
-              message: "Recargar lista",
-              child: ElevatedButton(
-                style: Standard.buttonStandardStyle(context),
-                onPressed: () => _loadPayment(),
-                child: const Icon(Icons.arrow_circle_down),
-              ),
-            ),
           ],
         ));
   }
 
+<<<<<<< HEAD
   _loadPayment() {
     _service.getPayament(widget.person.idperson.toString()).then((value) {
       _paymentList = value;
@@ -94,6 +103,8 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
 
   
 
+=======
+>>>>>>> Diseño
   /* _detail() {
     return Column(
       children: [],

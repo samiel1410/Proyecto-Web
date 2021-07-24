@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:pagosapp_group/services/paymet1_service.dart';
 
 
 
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/paymets1_card.dart';
+=======
+//import 'package:pagosapp_group/services/payment_service.dart';
+//import 'package:pagosapp_group/services/paymet1_service.dart';
+
+//import 'package:pagosapp_group/src/models/payment_model.dart';
+import 'package:pagosapp_group/src/models/person_model.dart';
+//import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
+>>>>>>> Diseño
 
 class PaymentsList1 extends StatefulWidget {
   const PaymentsList1({Key? key,}) : super(key: key);
@@ -15,8 +24,14 @@ class PaymentsList1 extends StatefulWidget {
 }
 
 class _PaymentsListState extends State<PaymentsList1> {
+<<<<<<< HEAD
   PaymentService1 _service = PaymentService1();
   List<Payment> _payments = [];
+=======
+  /*PaymentService _service = PaymentService();
+  List<Payment> _payments = [];*/
+  final Person? person = null;
+>>>>>>> Diseño
 
   @override
   void initState() {

@@ -62,6 +62,7 @@ class _PaymentFormState extends State<PaymentForm> {
               Standard.getBackground(context),
               Column(
                 children: [
+<<<<<<< HEAD:lib/src/pages/pago_form.dart
                   SizedBox(height: 35.0),
                   SizedBox(
                     height: 120.0,
@@ -71,6 +72,16 @@ class _PaymentFormState extends State<PaymentForm> {
                   ),
                   Standard.titleToForm(context, "Registro de Pago"),
                   _form()
+=======
+                  SizedBox(height: 40.0),
+                  ClipOval(
+                      child: Image.asset(
+                    'assets/images/icono_pago.png',
+                    height: 100,
+                  )),
+                  Standard.titleToForm2(context, "Registro Pago"),
+                  _form(context)
+>>>>>>> Diseño:lib/src/pages/forms/pago_form.dart
                 ],
               )
             ],

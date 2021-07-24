@@ -1,16 +1,16 @@
 // To parse this JSON data, do
 //
-//     final paymentType = paymentTypeFromJson(jsonString);
+//     final expenseType = expenseTypeFromJson(jsonString);
 
 import 'dart:convert';
 
-PaymentType paymentTypeFromJson(String str) =>
-    PaymentType.fromJson(json.decode(str));
+ExpenseType expenseTypeFromJson(String str) =>
+    ExpenseType.fromJson(json.decode(str));
 
-String paymentTypeToJson(PaymentType data) => json.encode(data.toJson());
+String expenseTypeToJson(ExpenseType data) => json.encode(data.toJson());
 
-class PaymentType {
-  PaymentType({
+class ExpenseType {
+  ExpenseType({
     required this.name,
     required this.description,
     required this.imagen,
@@ -20,7 +20,7 @@ class PaymentType {
   String description;
   String imagen;
 
-  factory PaymentType.fromJson(Map<String, dynamic> json) => PaymentType(
+  factory ExpenseType.fromJson(Map<String, dynamic> json) => ExpenseType(
         name: json["name"],
         description: json["description"],
         imagen: json["imagen"],

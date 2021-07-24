@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Diseño
 import 'package:pagosapp_group/src/models/payment_model.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';

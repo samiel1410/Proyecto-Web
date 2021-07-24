@@ -70,7 +70,7 @@ class Standard {
         padding: EdgeInsets.all(20));
   }
 
-  static Widget LabelToButton(BuildContext context, String text, Color color) {
+  static Widget labelToButton(BuildContext context, String text, Color color) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 7.0),
       child: Text(text,
@@ -78,7 +78,7 @@ class Standard {
     );
   }
 
-  static Widget TitleToForm(BuildContext context, String title) {
+  static Widget titleToForm2(BuildContext context, String title) {
     Color _color = Theme.of(context).cardColor;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 7.0),
@@ -87,22 +87,12 @@ class Standard {
     );
   }
 
-  static ButtonStyle BtnStyle(BuildContext context) {
+  static ButtonStyle btnStyle(BuildContext context) {
     return ElevatedButton.styleFrom(
         elevation: 5.0,
         shadowColor: Theme.of(context).dividerColor,
         shape: CircleBorder(),
         padding: EdgeInsets.all(20));
-  }
-
-  static String GetFisioImage(String type) {
-    return type
-        .replaceAll("Fisioterapia ", "")
-        .replaceAll("á", "a")
-        .replaceAll("é", "e")
-        .replaceAll("í", "i")
-        .replaceAll("ó", "o")
-        .replaceAll("ú", "u");
   }
 
   static Widget getInfoLine(

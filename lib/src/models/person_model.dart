@@ -4,7 +4,11 @@
 
 import 'dart:convert';
 
+<<<<<<< HEAD
 import 'package:pagosapp_group/src/models/tarjeta_model.dart';
+=======
+//import 'package:pagosapp_group/src/models/tarjeta_model.dart';
+>>>>>>> Diseño
 
 Person personFromJson(String str) => Person.fromJson(json.decode(str));
 
@@ -16,15 +20,17 @@ class Person {
     required this.name,
     required this.biography,
     this.photo,
-    this.cards,
+    //this.cards,
     //this.payments,
   });
+
+  Person.create(this.name, this.biography);
 
   String name;
   String? idperson;
   String biography;
   String? photo;
-  List<Tarjeta>? cards;
+  //List<Tarjeta>? cards;
   // List<Payment>? payments;
 
   factory Person.fromJson(Map<String, dynamic> json) => Person(
@@ -43,7 +49,7 @@ class Person {
         "name": name,
         "biography": biography,
         "photo": photo,
-        "cards": List<dynamic>.from(cards!.map((x) => x.toJson())),
+        //"cards": List<dynamic>.from(cards!.map((x) => x.toJson())),
         //"payments": List<dynamic>.from(payments!.map((x) => x.toJson())),
       };
 }

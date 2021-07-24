@@ -3,7 +3,10 @@ import 'package:pagosapp_group/services/person_service.dart';
 import 'package:pagosapp_group/src/models/person_model.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/cards/person_card.dart';
+<<<<<<< HEAD
 
+=======
+>>>>>>> Diseño
 
 class PersonList extends StatefulWidget {
   const PersonList({Key? key}) : super(key: key);
