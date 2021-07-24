@@ -1,0 +1,68 @@
+[
+    {
+        "name" : "Casa",
+        "description" : "Gastos del hogar",
+        "imagen" : "casa"
+    },
+    {
+        "name" : "Comida",
+        "description" : "Gastos de comida",
+        "imagen" : "comida"
+    },
+    {
+        "name" : "Comunicaciones",
+        "description" : "Gastos de comunicaciones como internet, telefono, celular",
+        "imagen" : "comunicaciones"
+    },
+    {
+        "name" : "Deportes",
+        "description" : "Gastos en deportes",
+        "imagen" : "deportes"
+    },
+    {
+        "name" : "Entretenimientos",
+        "description" : "Gastos de entretenimiento como, Netflix, Cines, Paseos",
+        "imagen" : "entretenimiento"
+    },
+    {
+        "name" : "Facturas",
+        "description" : "Gastos de facuras",
+        "imagen" : "facturas"
+    },
+    {
+        "name" : "Mascotas",
+        "description" : "Gastos de mascotas, como comida, veterinario, ropa ",
+        "imagen" : "mascotas"
+    },
+    {
+        "name" : "Regalos",
+        "description" : "Gastos de regalos",
+        "imagen" : "regalos"
+    },
+    {
+        "name" : "Ropa",
+        "description" : "Gastos de ropa",
+        "imagen" : "ropa"
+    },
+    {
+        "name" : "Restaurante",
+        "description" : "Gastos de restaurantes",
+        "imagen" : "restaurante"
+    },
+    {
+        "name" : "Salud",
+        "description" : "Gastos de salud",
+        "imagen" : "salud"
+    },
+    {
+        "name" : "Transporte",
+        "description" : "Gastos de transporte",
+        "imagen" : "transporte"
+    },
+    {
+        "name" : "Educación",
+        "description" : "Gastos de educación",
+        "imagen" : "educacion"
+    }
+
+]

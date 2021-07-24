@@ -38,7 +38,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             Text("Pagos Pendientes",
                 style: Theme.of(context).textTheme.headline5),
-            RaisedButton(
+            ElevatedButton(
               child: Icon(Icons.add),
               onPressed: () {
                 Navigator.push(

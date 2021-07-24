@@ -1,0 +1,15 @@
+[
+    {
+        "name" : "Ahorros",
+        "description" : "Ingresos de dinero ahorrado"
+    },
+    {
+        "name" : "Deposito",
+        "description" : "Ingreso de dinero depositado"
+    },
+    {
+        "name" : "Salario",
+        "description" : "Ingreso del salario"
+    }
+
+]

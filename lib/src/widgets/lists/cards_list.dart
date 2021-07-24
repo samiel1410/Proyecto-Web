@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/services/card_service.dart';
+//import 'package:pagosapp_group/services/card_service.dart';
 import 'package:pagosapp_group/src/models/tarjeta_model.dart';
 import 'package:pagosapp_group/src/widgets/cards/cards_card.dart';
 
@@ -11,7 +11,7 @@ class CardList extends StatefulWidget {
 }
 
 class _CardListState extends State<CardList> {
-  CardService _service = CardService();
+  //CardService _service = CardService();
   List<Tarjeta> _cards = [];
 
   @override

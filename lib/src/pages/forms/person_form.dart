@@ -199,7 +199,7 @@ class _PersonFormState extends State<PersonForm> {
   }
 
   Future _selectImage(ImageSource source) async {
-    final pickedFile = await _picker.getImage(source: source);
+    final pickedFile = await _picker.pickImage(source: source);
 
     //image: DecorationImage(image: FileImage(File()))
     //final File file = File(pickedFile!.path);

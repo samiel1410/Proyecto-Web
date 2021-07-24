@@ -23,7 +23,7 @@ class _PersonDetailWidgetState extends State<PersonDetailWidget>
 
   late TabController _tabController;
   PaymentService _service = new PaymentService();
-  List<Payment>? _paymentList = null;
+  List<Payment>? _paymentList;
 
   @override
   void initState() {
