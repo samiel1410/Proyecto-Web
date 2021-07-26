@@ -4,11 +4,7 @@
 
 import 'dart:convert';
 
-<<<<<<< HEAD
-import 'package:pagosapp_group/src/models/tarjeta_model.dart';
-=======
 //import 'package:pagosapp_group/src/models/tarjeta_model.dart';
->>>>>>> Diseño
 
 Person personFromJson(String str) => Person.fromJson(json.decode(str));
 

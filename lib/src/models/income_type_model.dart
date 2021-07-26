@@ -13,18 +13,23 @@ class IncomeType {
   IncomeType({
     required this.name,
     required this.description,
+    required this.image
   });
 
   String name;
   String description;
+  String image;
 
   factory IncomeType.fromJson(Map<String, dynamic> json) => IncomeType(
         name: json["name"],
         description: json["description"],
+        image : json["image"]
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "description": description,
+        "image": image,
+        
       };
 }

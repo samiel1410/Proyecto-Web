@@ -1,19 +1,11 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:pagosapp_group/src/pages/barras_page.dart';
-import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';
-=======
-//import 'package:pagosapp_group/src/pages/forms/check_form.dart';
-import 'package:pagosapp_group/src/pages/forms/person_form.dart';
-/*import 'package:pagosapp_group/src/models/person_model.dart';
-import 'package:pagosapp_group/src/widgets/cards/paymets_card.dart';
-import 'package:pagosapp_group/src/widgets/lists/cards_list.dart';
-import 'package:pagosapp_group/src/widgets/lists/payments_list.dart';
-import 'package:pagosapp_group/src/widgets/lists/payments_one_list.dart';*/
->>>>>>> Diseño
+import 'package:pagosapp_group/src/pages/forms/expense_form.dart';
+import 'package:pagosapp_group/src/pages/forms/income_form.dart';
+import 'package:pagosapp_group/src/utils/standard_widgets.dart';
+import 'package:pagosapp_group/src/widgets/lists/expense_list.dart';
+import 'package:pagosapp_group/src/widgets/lists/income_lits.dart';
 
-//mport 'package:pagosapp_group/src/widgets/lists/paymets_list.dart';
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({Key? key}) : super(key: key);
@@ -23,7 +15,9 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> with 
+
 SingleTickerProviderStateMixin{
+
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Gastos',),
     Tab(text: 'Ingresos'),
@@ -33,6 +27,7 @@ SingleTickerProviderStateMixin{
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);
+  
   }
 
    @override
@@ -78,55 +73,60 @@ SingleTickerProviderStateMixin{
               height: 20.0,
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              Text("Pagos Pendientes",
+              Text("Gastos Recientes",
                   style: Theme.of(context).textTheme.headline5),
               // ignore: deprecated_member_use
-              RaisedButton(
-                child: Icon(Icons.bar_chart_outlined),
+              
+         
+               ElevatedButton(
+                child: Icon(Icons.add),
                 onPressed: () {
                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PieChartPage()));
+                        builder: (context) => ExpenseForm()));
                 }
               )
+              
             ]),
             //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
-            PaymentsList1()
+            ExpenseList()
           ],
         ),
     );
 
   }
   _ingresos(){
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-         
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Text("Ingresos",
-                style: Theme.of(context).textTheme.headline5),
-<<<<<<< HEAD
-            // ignore: deprecated_member_use
-         
-=======
-            ElevatedButton(
-              child: Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PersonForm(),
-                      //builder: (context) => PersonForm(),
-                    ));
-              },
-            )
->>>>>>> Diseño
-          ]),
-          //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
-          PaymentsList1()
-        ],
-      )
-    );
+    return Scaffold(
+      appBar:  AppBar(title: Text("Ingresos" ,),),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
+              IncomeList()
+            ],
+          )
+        ),
+       floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Tooltip(
+              message: "Agregar Sueldo",
+              child: ElevatedButton(
+                style: Standard.buttonStandardStyle(context),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => IncomeForm(),
+                      ));
+                },
+                child: const Icon(Icons.add),
+              ),
+            ),
+
+          ],
+        ));
+    
   }
 }

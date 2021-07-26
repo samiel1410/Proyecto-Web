@@ -21,7 +21,7 @@ class _IncomeFormState extends State<IncomeForm> {
   IncomeService _serviceIncome = new IncomeService();
   IncomeTypeService _serviceTypeIncome = new IncomeTypeService();
   List<IncomeType> _categories = [];
-  late Income _income;
+  late Income _income= Income.create("Ahorros", "", "", DateTime.now(),"");
 
   bool _onSaving = false;
 
@@ -29,7 +29,7 @@ class _IncomeFormState extends State<IncomeForm> {
   void initState() {
     super.initState();
     _loadTypeIncome();
-    _income = new Income.create("Ahorros", "", "", DateTime.now());
+    
   }
 
   @override
@@ -46,7 +46,9 @@ class _IncomeFormState extends State<IncomeForm> {
                   SizedBox(height: 35.0),
                   SizedBox(
                     height: 120.0,
-                    child: Image.asset("assets/images/cheque.png"),
+                    child:  Image.asset("assets/images/" +
+                        Standard.getFisioImage(_income.category) +
+                        ".png"),
                   ),
                   Standard.titleToForm(context, "Registro de Ingresos"),
                   _form()
@@ -99,6 +101,7 @@ class _IncomeFormState extends State<IncomeForm> {
       onChanged: (String? newValue) {
         setState(() {
           _income.category = newValue!;
+          _income.image =  Standard.getFisioImage(newValue);
         });
       },
       items: _categories.map<DropdownMenuItem<String>>((IncomeType value) {
@@ -110,22 +113,7 @@ class _IncomeFormState extends State<IncomeForm> {
     );
   }
 
-  _inputCategory() {
-    return TextFormField(
-        initialValue: _income.category,
-        onSaved: (value) {
-          _income.category = value.toString();
-        },
-        validator: (value) {
-          if (value!.length < 3) {
-            return "El nombre de contener mínino 3 caracteres";
-          } else {
-            return null;
-          }
-        },
-        decoration: InputDecoration(labelText: "Categoria"),
-        maxLength: 35);
-  }
+  
 
   _inputDescription() {
     return TextFormField(
@@ -199,8 +187,7 @@ class _IncomeFormState extends State<IncomeForm> {
             child: ElevatedButton(
               onPressed: () {
                 _sendForm();
-                _onSaving = true;
-                setState(() {});
+                
               },
               child: Icon(Icons.save),
               style: Standard.buttonStandardStyle(context),
@@ -210,13 +197,15 @@ class _IncomeFormState extends State<IncomeForm> {
 
   _sendForm() async {
     if (!formKey.currentState!.validate()) return;
-
+ _onSaving = true;
+    setState(() {});
     //Vincula el valor de las controles del formulario a los atributos del modelo
     formKey.currentState!.save();
 
     //Llamamos al servicio para guardar el reporte
     _serviceIncome.sendIncome(_income).then((value) {
       formKey.currentState!.reset();
+      _onSaving = false;
       Navigator.pop(context);
     });
   }

@@ -1,40 +1,49 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:pagosapp_group/services/card_service.dart';
-import 'package:pagosapp_group/services/payment_service.dart';
-import 'package:pagosapp_group/services/payment_type_service.dart';
-import 'package:pagosapp_group/src/models/payment_model.dart';
-import 'package:pagosapp_group/src/models/payment_type_model.dart';
-import 'package:pagosapp_group/src/models/tarjeta_model.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:pagosapp_group/services/expense_service.dart';
+import 'package:pagosapp_group/services/expense_type_service.dart';
+
+import 'dart:io';
+
+import 'package:pagosapp_group/src/models/expense_model.dart';
+import 'package:pagosapp_group/src/models/expense_type_model.dart';
+
+
+
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 
 
 //import 'package:provider/provider.dart';
 
-class PaymentForm extends StatefulWidget {
-  const PaymentForm({Key? key, required this.idperson}) : super(key: key);
-  final String idperson;
+class ExpenseForm extends StatefulWidget {
+  const ExpenseForm({Key? key}) : super(key: key);
+  
   
 
   @override
-  _PaymentFormState createState() => _PaymentFormState();
+  _ExpenseFormState createState() => _ExpenseFormState();
 }
 
-class _PaymentFormState extends State<PaymentForm> {
+class _ExpenseFormState extends State<ExpenseForm> {
   //Clave para vincular el Formulario (Form)
   final formKey = GlobalKey<FormState>();
 
-  PaymentTypeService _serviceTypePayment= new PaymentTypeService();
-  PaymentService _servicePayment = new PaymentService();
-  CardService _cardService = new CardService();
-  List<PaymentType> _types = [];
-  List<Tarjeta> _cards = [];
+ 
+  ExpenseTypeService _serviceCategori = new ExpenseTypeService();
+  
+  ExpenseService _expenseService = new ExpenseService();
+
+  List<ExpenseType> _categoris = [];
   DateTime _selectedDate = DateTime.now();
   bool _bolean = true;
-
+   late File _image;
+   bool _imageSelected = false;
+  final ImagePicker _picker = ImagePicker();
   //Un objeto del modelo a enviar
-  late Payment _payment;
+  late Expense _expense= Expense.create("Casa","","",_selectedDate,"","");
   
   
  
@@ -43,11 +52,10 @@ class _PaymentFormState extends State<PaymentForm> {
   @override
   void initState() {
     super.initState();
-    _loadTypePayments();
-    _loadCards();
+    
+    _loadTypeIncome();
  
-    _payment = Payment.create(
-        "", "", "",widget.idperson, _selectedDate, "" , "Efectivo" , "visa");
+    
   }
 
   
@@ -62,26 +70,17 @@ class _PaymentFormState extends State<PaymentForm> {
               Standard.getBackground(context),
               Column(
                 children: [
-<<<<<<< HEAD:lib/src/pages/pago_form.dart
-                  SizedBox(height: 35.0),
-                  SizedBox(
-                    height: 120.0,
-                    child: Image.asset("assets/images/" +
-                        Standard.getFisioImage(_payment.typePage) +
-                        ".png"),
-                  ),
-                  Standard.titleToForm(context, "Registro de Pago"),
-                  _form()
-=======
                   SizedBox(height: 40.0),
+                  
                   ClipOval(
-                      child: Image.asset(
-                    'assets/images/icono_pago.png',
-                    height: 100,
-                  )),
-                  Standard.titleToForm2(context, "Registro Pago"),
-                  _form(context)
->>>>>>> Diseño:lib/src/pages/forms/pago_form.dart
+                    
+                      child: Image.asset("assets/images/" +
+                        Standard.getFisioImage(_expense.categori) +
+                        ".png")
+                    
+                  ),
+                  Standard.titleToForm2(context, "Registro de Gasto"),
+                  _form()
                 ],
               )
             ],
@@ -90,7 +89,7 @@ class _PaymentFormState extends State<PaymentForm> {
   }
   _form() {
   final size = MediaQuery.of(context).size;
-  _cards.length == 0 ? _bolean = false : _bolean = true ;
+  
   
   return Container(
     child: Column(
@@ -110,21 +109,19 @@ class _PaymentFormState extends State<PaymentForm> {
             child: Column(
               children: [
                 
-                 _typePay(),
-                   SizedBox(height: 10),
-                titlePay(),
+                SizedBox(height: 10),
+                _categori(),
                 SizedBox(height: 10),
                 _description(),
                 SizedBox(height: 10),
                 _monto(),
-                _payment.typePage == "Tarjeta" ?
-                _detail()
-                : Container(),
                 SizedBox(height: 10),
+                _imageSelected == true
+                 ? _showImage()
+                 :_photo(),
                 _dateOfPage(),
                 SizedBox(height: 10),
                 _ubicacion(),
-               
                 SizedBox(height: 10),
                 _boton()
               ],
@@ -136,46 +133,17 @@ class _PaymentFormState extends State<PaymentForm> {
   );
 }
 
-titlePay() {
-  return TextFormField(
-    initialValue: _payment.title,
-    onSaved: (value) {
-      //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _payment.title = value.toString();
-    },
-    validator: (value) {
-      if (value!.length < 5) {
-        return "Debe ingresar un mensaje con al menos 10 caracteres";
-      } else {
-        return null; //Validación se cumple al retorna null
-      }
-    },
-    enabled: _bolean,
-    decoration: InputDecoration(
-      labelText: "Nombre",
-      suffixIcon: Icon(Icons.add_comment_outlined),
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide:
-            BorderSide(color: Theme.of(context).accentColor, width: 3.0),
-      ),
-    ),
-  );
-}
 
 _description() {
   return TextFormField(
-     initialValue: _payment.description,
+     initialValue: _expense.description,
     onSaved: (value) {
       //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _payment.description = value.toString();
+      _expense.description = value.toString();
     },
     validator: (value) {
-      if (value!.length < 15) {
-        return "Debe ingresar un mensaje con al menos 15 caracteres";
+      if (value!.length < 10) {
+        return "Debe ingresar un mensaje con al menos 10 caracteres";
       } else {
         return null; //Validación se cumple al retorna null
       }
@@ -197,48 +165,12 @@ _description() {
 }
 
 
-_detail(){
-  
-  return   _payment.typePage == "Tarjeta" && _cards.length == 0 ?
-  Container(child: Text("No contiene tarjetas"),)
-
-  :_payment.typePage == "Tarjeta" && _cards.length != 0 ?
-  
- DropdownButton<String>(
-
-      value: _payment.detailPay,
-      
-      icon: const Icon(Icons.expand_more),
-      iconSize: 24,
-      elevation: 16,
-      isExpanded: true,
-      underline: Container(
-        height: 2,
-        color: Theme.of(context).dividerColor,
-      ),
-      onChanged: (String? newValue ) { 
-        setState(() { 
-         _payment.detailPay = newValue!;
-         print(newValue);
-        
-        });
-      },
-      
-      items: _cards.map<DropdownMenuItem<String>>((Tarjeta value) {
-        return DropdownMenuItem<String>(
-          value: value.name,
-          child: Text(value.name),
-        );
-      }).toList(),
-    ) : Container();
-
-}
 _monto() {
   return TextFormField(
-    initialValue: _payment.amount,
+    initialValue: _expense.amount,
     onSaved: (value) {
       //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _payment.amount = value.toString();
+      _expense.amount = value.toString();
     },
   
     validator: (value) {
@@ -281,7 +213,7 @@ _dateOfPage() {
             
             onChange: (DateTime newDate, _) {
               _selectedDate = newDate;
-              _payment.date = _selectedDate;
+              _expense.date = _selectedDate;
             },
             pickerTheme: DateTimePickerTheme(
               
@@ -297,10 +229,10 @@ _dateOfPage() {
 
 _ubicacion() {
   return TextFormField(
-      initialValue: _payment.address,
+      initialValue: _expense.address,
     onSaved: (value) {
       //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _payment.address = value.toString();
+      _expense.address = value.toString();
     },
     validator: (value) {
       if (value!.length < 5) {
@@ -325,10 +257,10 @@ _ubicacion() {
   );
 }
 
-_typePay() {
+_categori() {
   return  DropdownButton<String>(
       
-      value: _payment.typePage,
+      value: _expense.categori,
       icon: const Icon(Icons.expand_more),
       iconSize: 24,
       elevation: 16,
@@ -339,10 +271,11 @@ _typePay() {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          _payment.typePage = newValue!;
+          _expense.categori = newValue!;
+          _expense.image = Standard.getFisioImage(newValue);
         });
       },
-      items: _types.map<DropdownMenuItem<String>>((PaymentType value) {
+      items: _categoris.map<DropdownMenuItem<String>>((ExpenseType value) {
         return DropdownMenuItem<String>(
           value: value.name,
           child: Text(value.name),
@@ -350,7 +283,39 @@ _typePay() {
       }).toList(),
     );
   }
+_photo(){
+  return Container(
+                          margin: EdgeInsets.symmetric(horizontal: 16),
+                              height: 170,
+                            
+                            decoration: BoxDecoration(color: Colors.white,
+                            borderRadius: BorderRadius.circular(6)),
+                      
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Tooltip(
+                                message: "Tomar foto",
+                                child: ElevatedButton(
+                                  onPressed: _takeImage,
+                                  child: Icon(Icons.camera_alt,  color: Colors.black45,),
+                                  style: Standard.buttonStandardStyle(context),
+                                ),
+                              ),
+                              Tooltip(
+                                message: "Buscar foto",
+                                child: ElevatedButton(
+                                  onPressed: _pickImage,
+                                  child: Icon(Icons.image),
+                                  style: Standard.buttonStandardStyle(context),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
 
+
+}
 _boton() {
   return _onSaving
         ? Container(
@@ -363,8 +328,7 @@ _boton() {
             child: ElevatedButton(
               onPressed: () {
                 _sendForm();
-                _onSaving = true;
-                setState(() {});
+               
               },
               child: Icon(Icons.save),
               style: Standard.buttonStandardStyle(context),
@@ -374,30 +338,66 @@ _boton() {
 
    _sendForm() async {
     if (!formKey.currentState!.validate()) return;
-
+    _onSaving = true;
+    setState(() {});
     //Vincula el valor de las controles del formulario a los atributos del modelo
     formKey.currentState!.save();
 
+    if (!formKey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Processing Data')));
+                      }
+    if (_imageSelected) {
+      _expense.photo = await _expenseService.uploadImage(_image);
+    }
     //Llamamos al servicio para guardar el reporte
-    _servicePayment.sendPayment(_payment).then((value) {
+    _expenseService.sendExpense(_expense).then((value) {
       formKey.currentState!.reset();
+      _onSaving = false;
       Navigator.pop(context);
     });
   }
 
-  _loadTypePayments() {
-    _serviceTypePayment.getTypes().then((value) {
-      _types = value;
+   _takeImage() {
+    _selectImage(ImageSource.camera);
+  }
+
+  _pickImage() {
+    _selectImage(ImageSource.gallery);
+  }
+
+  Future _selectImage(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      _imageSelected = true;
+    } else {
+      print('No image selected.');
+      _imageSelected = false;
+    }
+    setState(() {});
+  }
+   _showImage() {
+    return Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50.0),
+          color: Theme.of(context).canvasColor),
+      child: 
+          _imageSelected == false
+              ? Container()
+              : Image.file(_image),
+    );
+  }
+
+
+   _loadTypeIncome() {
+    _serviceCategori.getTypes().then((value) {
+      _categoris = value;
       setState(() {});
     });
   }
-
-   _loadCards() {
-    _cardService.getCard(widget.idperson).then((value) {
-      _cards = value;
-  
-      setState(() {});
-    });
-  }
-
 }

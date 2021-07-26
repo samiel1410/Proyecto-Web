@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/models/payment_model.dart';
-import 'package:pagosapp_group/src/models/person_model.dart';
+import 'package:pagosapp_group/src/models/expense_model.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/content/payment_detail_widget.dart';
 
 class PaymentPage extends StatelessWidget {
-  const PaymentPage({Key? key, required this.payment, required this.person})
+  const PaymentPage({Key? key, required this.payment})
       : super(key: key);
-  final Payment payment;
-  final Person person;
+  final Expense payment;
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Standard.appBar(context, payment.title),
+        appBar: Standard.appBar(context, payment.categori),
         body: CustomScrollView(
           slivers: [
             _appBar(context),
             SliverFillRemaining(
-                child: PaymentDetailsWidget(payment: payment, person: person))
+                child: PaymentDetailsWidget(payment: payment))
           ],
         ));
   }
@@ -49,7 +48,7 @@ class PaymentPage extends StatelessWidget {
                           ".png"),
                     ),*/
                   ),
-                  Standard.titleToForm(context, payment.title)
+                  Standard.titleToForm(context, payment.categori)
                 ]),
               ),
             ],

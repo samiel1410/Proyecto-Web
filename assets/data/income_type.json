@@ -1,15 +1,18 @@
 [
     {
         "name" : "Ahorros",
-        "description" : "Ingresos de dinero ahorrado"
+        "description" : "Ingresos de dinero ahorrado",
+        "image": "ahorros.png"
     },
     {
         "name" : "Deposito",
-        "description" : "Ingreso de dinero depositado"
+        "description" : "Ingreso de dinero depositado",
+        "image": "deposito.png"
     },
     {
         "name" : "Salario",
-        "description" : "Ingreso del salario"
+        "description" : "Ingreso del salario",
+        "image": "salario.png"
     }
 
 ]

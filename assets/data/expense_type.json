@@ -22,7 +22,7 @@
     {
         "name" : "Entretenimientos",
         "description" : "Gastos de entretenimiento como, Netflix, Cines, Paseos",
-        "imagen" : "entretenimiento"
+        "imagen" : "entretenimientos"
     },
     {
         "name" : "Facturas",

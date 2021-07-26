@@ -45,7 +45,11 @@ class Standard {
   }
 
    static String getFisioImage(String type) {
-    return type.toLowerCase();
+    return type.toLowerCase().replaceAll("á", "a")
+        .replaceAll("é", "e")
+        .replaceAll("í", "i")
+        .replaceAll("ó", "o")
+        .replaceAll("ú", "u");
   }
 
 

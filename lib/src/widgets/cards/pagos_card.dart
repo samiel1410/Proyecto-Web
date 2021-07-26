@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/models/payment_model.dart';
+import 'package:pagosapp_group/src/models/expense_model.dart';
 
 class PagosCard extends StatelessWidget {
   const PagosCard({Key? key, required this.currentPayment}) : super(key: key);
-  final Payment currentPayment;
+  final Expense currentPayment;
 
   @override
   Widget build(BuildContext context) {
