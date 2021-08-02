@@ -21,10 +21,11 @@ class _IncomeFormState extends State<IncomeForm> {
   IncomeService _serviceIncome = new IncomeService();
   IncomeTypeService _serviceTypeIncome = new IncomeTypeService();
   List<IncomeType> _categories = [];
-  late Income _income= Income.create("Ahorros", "", "", DateTime.now(),"");
+  int _amount = 0;
+  late Income _income= Income.create("Ahorros", "", _amount, DateTime.now(),"");
 
   bool _onSaving = false;
-
+  
   @override
   void initState() {
     super.initState();
@@ -134,9 +135,9 @@ class _IncomeFormState extends State<IncomeForm> {
 
   _inputAmount() {
     return TextFormField(
-        initialValue: _income.amount,
+        initialValue: _amount.toString(),
         onSaved: (value) {
-          _income.amount = value.toString();
+          _income.amount = int.tryParse(value!)!;
         },
         validator: (value) {
           if (value!.length < 1) {

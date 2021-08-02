@@ -1,22 +1,29 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/providers/app_provider.dart';
+import 'package:pagosapp_group/providers/goal_elements.dart';
 import 'package:pagosapp_group/src/pages/main_page.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
-   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
 
+ runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<GoalElementProvider>(
+        create: (_) => GoalElementProvider()),
+    ChangeNotifierProvider<AppProvider>(create: (_) => AppProvider())
+  ], child: MyApp()));
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-    primarySwatch: Colors.blue,
-  ),
-      home: MainPage()
-    );
+    return ChangeNotifierProvider<AppProvider>(
+        create: (BuildContext context) => AppProvider(),
+        child: Consumer<AppProvider>(builder: (context, provider, __) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Aplicacion',
+            home: MainPage(),
+          );
+        }));
   }
 }

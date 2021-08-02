@@ -30,10 +30,11 @@ Future<void> showMyDialog(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(expe.categori),
+          title: Text(expe.categori + "\n" + "Ubicacion: "+ expe.address),
           content: expe.photo == null
           ?Container(child: Text("No hay ninguna foto"),)
           :Image.network(expe.photo.toString())
+          
         );
       },
     );

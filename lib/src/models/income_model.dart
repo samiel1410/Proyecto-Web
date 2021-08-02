@@ -20,7 +20,7 @@ class Income {
   String? idincome;
   String category;
   String description;
-  String amount;
+  int amount;
   DateTime date;
   String image;
 

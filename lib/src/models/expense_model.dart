@@ -25,7 +25,7 @@ class Expense {
     String? idexpense;
     String categori;
     String description;
-    String amount;
+    int amount;
     DateTime date;
     String address;
     String image;
@@ -35,7 +35,7 @@ class Expense {
         idexpense: json["idexpense"],
         categori: json["categori"],
         description: json["description"],
-        amount: json["amount"],
+        amount:  json["amount"],
         date: DateTime.parse(json["date"]),
         address: json["address"],
         image: json["image"],

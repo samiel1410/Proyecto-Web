@@ -42,12 +42,14 @@ class _ExpenseFormState extends State<ExpenseForm> {
    late File _image;
    bool _imageSelected = false;
   final ImagePicker _picker = ImagePicker();
+  int _amount = 0;
   //Un objeto del modelo a enviar
-  late Expense _expense= Expense.create("Casa","","",_selectedDate,"","");
+  late Expense _expense= Expense.create("Casa","",_amount,_selectedDate,"","");
   
   
  
   bool _onSaving = false;
+  
 
   @override
   void initState() {
@@ -167,10 +169,10 @@ _description() {
 
 _monto() {
   return TextFormField(
-    initialValue: _expense.amount,
+    initialValue: _amount.toString(),
     onSaved: (value) {
       //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-      _expense.amount = value.toString();
+      _expense.amount = int.tryParse(value!)!;
     },
   
     validator: (value) {
