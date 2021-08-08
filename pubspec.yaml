@@ -48,6 +48,8 @@ dependencies:
   syncfusion_flutter_charts: ^19.2.48
   path_provider: ^2.0.2  
   sqflite: ^2.0.0+3  
+  shared_preferences: ^2.0.6
+  flutter_speed_dial: ^4.2.0
 
   
   

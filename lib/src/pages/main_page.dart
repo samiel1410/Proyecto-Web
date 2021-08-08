@@ -1,36 +1,120 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:pagosapp_group/providers/app_provider.dart';
+import 'package:pagosapp_group/src/pages/forms/expense_form.dart';
+import 'package:pagosapp_group/src/pages/forms/income_form.dart';
+import 'package:pagosapp_group/src/pages/forms/settings_page.dart';
 
 import 'package:pagosapp_group/src/utils/enums.dart';
+import 'package:provider/provider.dart';
+
 //import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 0;
-
-  //@override
-  void initStatet() {
-    super.initState();
-    print("Inicio del estado");
-  }
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key, required this.titulo}) : super(key: key);
+  final String titulo;
 
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    int selectedPage = appProvider.selectedPage;
+
     return Scaffold(
-      body: Container(child: contentWidget[_selectedIndex]),
+      appBar: AppBar(
+        centerTitle: true,
+        title:
+            Text(selectedPage == 0 ? titulo : menuOptions[selectedPage].label),
+        /*actions: [
+          PopupMenuButton<ItemMenu>(
+            onSelected: (value) {
+              if (value.label == "Configuración") {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsPage()));
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return settingsOptions.map((ItemMenu option) {
+                return PopupMenuItem<ItemMenu>(
+                    value: option,
+                    child: Row(
+                      children: [
+                        Icon(option.icon,
+                            color: Theme.of(context).primaryColor),
+                        SizedBox(width: 14.0),
+                        Text(option.label)
+                      ],
+                    ));
+              }).toList();
+            },
+          ),
+        ],*/
+      ),
+      body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 14.0),
+          child: contentWidget[selectedPage]),
+      floatingActionButton: selectedPage == 0
+          ? SpeedDial(
+              animatedIcon: AnimatedIcons.menu_close,
+              animatedIconTheme: IconThemeData(size: 22),
+              backgroundColor: Theme.of(context).accentColor,
+              visible: true,
+              curve: Curves.bounceIn,
+              children: [
+                // INCOME
+                SpeedDialChild(
+                    child: Icon(Icons.add),
+                    backgroundColor: Theme.of(context).accentColor,
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => IncomeForm()));
+                    },
+                    label: 'Ingresos',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 16.0),
+                    labelBackgroundColor: Theme.of(context).backgroundColor),
+                // EXPENSE
+                SpeedDialChild(
+                    child: Icon(Icons.money_off),
+                    backgroundColor: Color(0xFF801E48),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ExpenseForm()));
+                    },
+                    label: 'Gastos',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 16.0),
+                    labelBackgroundColor: Color(0xFF801E48)),
+                //SHARED PREFRENCE(THEME)
+                SpeedDialChild(
+                    child: Icon(Icons.settings),
+                    backgroundColor: Color(0xFF801E48),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsPage()));
+                    },
+                    label: 'Configuración',
+                    labelStyle: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        fontSize: 16.0),
+                    labelBackgroundColor: Color(0xFF801E48))
+              ],
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _selectedIndex,
+          currentIndex: selectedPage,
           onTap: (value) {
-            _selectedIndex = value;
-            setState(() {
-              print("cambio de estado");
-            });
+            appProvider.selectedPage = value;
           },
           items: menuOptions
               .map((e) =>

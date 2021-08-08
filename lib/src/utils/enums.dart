@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pagosapp_group/src/pages/analisis_page.dart';
 import 'package:pagosapp_group/src/pages/goal_page.dart';
 
-
 import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
-
-
 
 class ItemMenu {
   String label;
@@ -19,4 +16,9 @@ List<ItemMenu> menuOptions = [
   ItemMenu(Icons.emoji_events_outlined, "Metas"),
 ];
 
-List<Widget> contentWidget = [HomeWidget(), AnalisisPage() , GoalElementPage() ];
+List<ItemMenu> settingsOptions = [
+  ItemMenu(Icons.settings, "Configuración"),
+  ItemMenu(Icons.supervised_user_circle, "Créditos")
+];
+
+List<Widget> contentWidget = [HomeWidget(), AnalisisPage(), GoalElementPage()];
