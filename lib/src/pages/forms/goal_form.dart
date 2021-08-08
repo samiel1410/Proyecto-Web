@@ -16,42 +16,52 @@ class _GoalElementFormState extends State<GoalElementForm> {
   final formKey = GlobalKey<FormState>();
 
   //Un objeto del modelo a enviar
-  late Goal _element;
+ 
   bool _onSaving = false;
   double _credit = 0;
+  late Goal _element = Goal.create("",_credit);
   @override
   void initState() {
     super.initState();
-  
-    _element = Goal.create("",_credit);
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            width: size.width * .80,
-            decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(color: Theme.of(context).dividerColor)),
-            child: Form(
-                key: formKey,
-                child: Container(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 32.0, horizontal: 14.0),
-                  child: Column(
-                    children: [_inputName(), _inputAmount(), _buttons()],
-                  ),
-                )),
-          )
-        ],
-      ),
+      child: Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children:[ 
+           Standard.getBackground(context),
+          Column(
+           
+          children: [
+           
+             SizedBox(height: 40.0),
+              Standard.titleToForm2(context, "Registro de Meta"),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              width: size.width * .80,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: Theme.of(context).dividerColor)),
+              child: Form(
+                  key: formKey,
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 32.0, horizontal: 14.0),
+                    child: Column(
+                      
+                      children: [_inputName(), _inputAmount(), _buttons()],
+                    ),
+                    
+                  )),
+            ),
+              
+          ],
+        ),
+        ]),
     );
   }
 
@@ -63,20 +73,20 @@ class _GoalElementFormState extends State<GoalElementForm> {
           _element.name = value.toString();
         },
         validator: (value) {
-          if (value!.length < 5) {
-            return "Debe ingresar una descripción con al menos 5 caracteres";
+          if (value!.length < 10) {
+            return "Debe ingresar una descripción con al menos 10 caracteres";
           } else {
             return null; //Validación se cumple al retorna null
           }
         },
-        decoration: InputDecoration(labelText: "Nombre"),
-        maxLength: 255,
-        maxLines: 4);
+        decoration: InputDecoration(labelText: "Nombre", suffixIcon: Icon(Icons.add_comment_outlined),),
+        maxLength: 20,
+       );
   }
 
  _inputAmount() {
     return TextFormField(
-        initialValue: _element.toString(),
+        initialValue: _credit.toString(),
         onSaved: (value) {
           _element.credit = double.tryParse(value!)!;
         },
@@ -87,8 +97,10 @@ class _GoalElementFormState extends State<GoalElementForm> {
             return null;
           }
         },
-        decoration: InputDecoration(labelText: "Cantidad"),
-        maxLength: 35);
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(labelText: "Cantidad",
+        suffixIcon: Icon(Icons.attach_money),),
+        maxLength: 8);
   }
 
   _buttons() {

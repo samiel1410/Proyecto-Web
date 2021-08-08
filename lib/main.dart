@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pagosapp_group/providers/app_provider.dart';
 import 'package:pagosapp_group/providers/goal_elements.dart';

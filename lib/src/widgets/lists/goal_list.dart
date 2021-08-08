@@ -26,7 +26,7 @@ class _GoalElementListState extends State<GoalElementList> {
             itemCount: goalProvider.elements.length,
             itemBuilder: (_, index) => Card(
                 child: ListTile(
-                    leading: Icon(Icons.medical_services),
+                    leading: Icon(Icons.emoji_events_outlined),
                     title: Text(goalProvider.elements[index].name),
                     trailing: Text(goalProvider.elements[index].credit.toString()) 
         )));

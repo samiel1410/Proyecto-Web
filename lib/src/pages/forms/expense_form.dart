@@ -38,7 +38,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
 
   List<ExpenseType> _categoris = [];
   DateTime _selectedDate = DateTime.now();
-  bool _bolean = true;
+
    late File _image;
    bool _imageSelected = false;
   final ImagePicker _picker = ImagePicker();
@@ -64,7 +64,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: Standard.appBar(context, "Nuevo Pago"),
+        appBar: Standard.appBar(context, "Nuevo Gasto"),
         body: SingleChildScrollView(
           child: Stack(
             alignment: AlignmentDirectional.topCenter,
@@ -150,7 +150,7 @@ _description() {
         return null; //Validación se cumple al retorna null
       }
     },
-      enabled: _bolean,
+    
     decoration: InputDecoration(
       labelText: "Descripcion",
       suffixIcon: Icon(Icons.add_comment_outlined),
@@ -182,7 +182,7 @@ _monto() {
         return null; //Validación se cumple al retorna null
       }
     },
-      enabled: _bolean,
+    
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       suffixIcon: Icon(Icons.attach_money),

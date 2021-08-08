@@ -34,11 +34,12 @@ class _GoalElementPageState extends State<GoalElementPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TabBar(
-        labelColor: Theme.of(context).primaryColor,
+      appBar:  AppBar(
+      bottom:TabBar(
+        labelColor: Theme.of(context).canvasColor,
         controller: _tabController,
         tabs: myTabs,
-      ),
+      ),title: Text("Metas")),
       body: TabBarView(
         controller: _tabController,
         children: [GoalElementForm(), GoalElementList()],

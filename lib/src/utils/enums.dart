@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pagosapp_group/src/pages/analisis_page.dart';
 import 'package:pagosapp_group/src/pages/goal_page.dart';
 
-import 'package:pagosapp_group/src/pages/perfil_page.dart';
+
 import 'package:pagosapp_group/src/widgets/content/home_widget.dart';
 
 
@@ -16,7 +16,7 @@ class ItemMenu {
 List<ItemMenu> menuOptions = [
   ItemMenu(Icons.home, "Inicio"),
   ItemMenu(Icons.pie_chart_outline, "Analisis"),
-  ItemMenu(Icons.account_circle_outlined, "Perfil"),
+  ItemMenu(Icons.emoji_events_outlined, "Metas"),
 ];
 
 List<Widget> contentWidget = [HomeWidget(), AnalisisPage() , GoalElementPage() ];
