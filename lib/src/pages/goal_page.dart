@@ -36,10 +36,10 @@ class _GoalElementPageState extends State<GoalElementPage>
     return Scaffold(
       appBar:  AppBar(
       bottom:TabBar(
-        labelColor: Theme.of(context).canvasColor,
+        labelColor: Theme.of(context).selectedRowColor,
         controller: _tabController,
         tabs: myTabs,
-      ),title: Text("Metas")),
+      )),
       body: TabBarView(
         controller: _tabController,
         children: [GoalElementForm(), GoalElementList()],

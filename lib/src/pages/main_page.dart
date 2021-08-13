@@ -50,7 +50,7 @@ class MainPage extends StatelessWidget {
         ],*/
       ),
       body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 14.0),
+          
           child: contentWidget[selectedPage]),
       floatingActionButton: selectedPage == 0
           ? SpeedDial(
@@ -75,11 +75,11 @@ class MainPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
                         fontSize: 16.0),
-                    labelBackgroundColor: Theme.of(context).backgroundColor),
+                    labelBackgroundColor: Theme.of(context).accentColor),
                 // EXPENSE
                 SpeedDialChild(
                     child: Icon(Icons.money_off),
-                    backgroundColor: Color(0xFF801E48),
+                    backgroundColor: Theme.of(context).accentColor,
                     onTap: () {
                       Navigator.push(
                           context,
@@ -91,11 +91,11 @@ class MainPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
                         fontSize: 16.0),
-                    labelBackgroundColor: Color(0xFF801E48)),
+                    labelBackgroundColor: Theme.of(context).accentColor),
                 //SHARED PREFRENCE(THEME)
                 SpeedDialChild(
                     child: Icon(Icons.settings),
-                    backgroundColor: Color(0xFF801E48),
+                    backgroundColor: Theme.of(context).accentColor,
                     onTap: () {
                       Navigator.push(
                           context,
@@ -107,7 +107,7 @@ class MainPage extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Colors.white,
                         fontSize: 16.0),
-                    labelBackgroundColor: Color(0xFF801E48))
+                    labelBackgroundColor: Theme.of(context).accentColor)
               ],
             )
           : null,

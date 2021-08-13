@@ -1,8 +1,6 @@
 //import 'package:js/js.dart';
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/pages/forms/expense_form.dart';
-import 'package:pagosapp_group/src/pages/forms/income_form.dart';
-import 'package:pagosapp_group/src/utils/standard_widgets.dart';
+
 import 'package:pagosapp_group/src/widgets/lists/expense_list.dart';
 import 'package:pagosapp_group/src/widgets/lists/income_lits.dart';
 
@@ -45,9 +43,9 @@ SingleTickerProviderStateMixin{
     appBar: AppBar(
     bottom:TabBar(
       
-          labelColor: Theme.of(context).canvasColor,
+          labelColor: Theme.of(context).selectedRowColor,
           controller: _tabController,
-          tabs: myTabs),title:Text("Aplicacion")),
+          tabs: myTabs),),
       body: TabBarView(
           controller: _tabController,
           children: [_gastos(), _ingresos()],
@@ -78,16 +76,6 @@ SingleTickerProviderStateMixin{
               // ignore: deprecated_member_use
               
          
-               ElevatedButton(
-                child: Icon(Icons.add),
-                onPressed: () {
-                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ExpenseForm()));
-                }
-              )
-              
             ]),
             //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
             ExpenseList()
@@ -98,35 +86,26 @@ SingleTickerProviderStateMixin{
   }
   _ingresos(){
     return Scaffold(
-      appBar:  AppBar(title: Text("Ingresos" ,),),
+      
         body: SingleChildScrollView(
           child: Column(
             children: [
+                   Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              Text("Ingresos recientes",
+                  style: Theme.of(context).textTheme.headline5),
+              // ignore: deprecated_member_use
+              
+         
+              
+              
+            ]),
               //PaymentsList(idperson: 'IT3P9wP2ph065ese9ExW',)
               IncomeList()
             ],
           )
         ),
-       floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Tooltip(
-              message: "Agregar Sueldo",
-              child: ElevatedButton(
-                style: Standard.buttonStandardStyle(context),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => IncomeForm(),
-                      ));
-                },
-                child: const Icon(Icons.add),
-              ),
-            ),
-
-          ],
-        ));
+     
+        );
     
   }
 }

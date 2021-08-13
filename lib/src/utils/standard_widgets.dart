@@ -58,7 +58,7 @@ class Standard {
   }
 
   static Widget titleToForm(BuildContext context, String title) {
-    Color _color = Theme.of(context).cardColor;
+    Color _color = Theme.of(context).selectedRowColor;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 14.0),
       child: Text(title,
@@ -83,7 +83,7 @@ class Standard {
   }
 
   static Widget titleToForm2(BuildContext context, String title) {
-    Color _color = Theme.of(context).cardColor;
+    Color _color = Theme.of(context).selectedRowColor;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 7.0),
       child: Text(title,

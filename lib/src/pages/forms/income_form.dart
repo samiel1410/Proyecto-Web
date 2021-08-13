@@ -168,7 +168,7 @@ class _IncomeFormState extends State<IncomeForm> {
             },
             pickerTheme: DateTimePickerTheme(
               backgroundColor: Theme.of(context).canvasColor,
-              itemTextStyle: TextStyle(color: Theme.of(context).primaryColor),
+              itemTextStyle: TextStyle(color: Theme.of(context).accentColor),
               dividerColor: Theme.of(context).disabledColor,
             ),
           )

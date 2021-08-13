@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           getDarkMode().then((value) => provider.darkMode = value);
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Aplicacion',
+            
             theme: ThemeData(
                 brightness: provider.darkMode == true
                     ? Brightness.dark
