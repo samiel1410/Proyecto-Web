@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pagosapp_group/src/pages/home_page.dart';
+import 'package:pagosapp_group/providers/app_provider.dart';
+import 'package:pagosapp_group/providers/login_providers.dart';
+import 'package:pagosapp_group/services/user_services.dart';
 import 'package:pagosapp_group/src/pages/resgiter_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,15 +25,15 @@ class LoginPage extends StatelessWidget {
            
             children:<Widget> [
                SizedBox(height: 20),
-              ic(context),
-                  SizedBox(height: 40),
+              
+                 
               titulo(context),
                   SizedBox(height: 20),
-              user(context),
+              EmailTextControl(),
                     SizedBox(height: 20),
-              password(context),
+               PasswordTextControl(),
         SizedBox(height: 30),
-              boton(),
+               SubmitButtonControl(),
               nologin(context)
         
             ],
@@ -53,63 +56,57 @@ Widget titulo(context){
   ),),);
 
 }
-Widget user(context){
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal:15,vertical:5),
-    child: TextField(
+
+class EmailTextControl extends StatelessWidget {
+  const EmailTextControl({Key? key}) : super(key: key);
+
+Widget build(BuildContext context){
+  final bloc = LoginProvider.of(context);
+  return StreamBuilder(
+    stream: bloc.emailStream,
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+    return TextField(
      
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(5),),
-          focusedBorder:OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue, width: 3.0),
-         ),
-        hintText: " USUARIO O CORREO",
-         hintStyle: TextStyle(fontWeight: FontWeight.w700 ,color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
-      ),
-    ),
-  );
-}
-
-
-
-Widget password(context){
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal:15,vertical:5),
-    child: TextField(
-      obscureText: true,
-      decoration: InputDecoration(
-      border: OutlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.circular(5),),
-         focusedBorder:OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue, width: 3.0),
-         ),
-        hintText: "CONTRASEÑA",
-        hintStyle: TextStyle(fontWeight: FontWeight.w700 ,color: Theme.of(context).accentColor),
-        fillColor: Colors.white,
-        filled: true,
+       
+        hintText: "usuario@pagos.com",
+        labelText: 'correo electronico',
         
+         errorText: snapshot.error?.toString(),
+    
       ),
-    ),
+      onChanged: bloc.changeEmail
+    );
+    }
   );
 }
-Widget boton(){
-  return Container(child:MaterialButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              side: BorderSide(color: Colors.black)),
-          minWidth: 60.0,
-          height: 50.0,
-          onPressed: () {},
-          color: Color.fromRGBO(46, 44, 180,1),
-          child: Text('INICIAR SESION',
-              style: TextStyle(color: Colors.white, fontSize: 20)),
-        ) ,);
 }
+
+
+class PasswordTextControl extends StatelessWidget {
+  const PasswordTextControl({Key? key}) : super(key: key);
+
+Widget build(BuildContext context){
+ final bloc = LoginProvider.of(context);
+  return StreamBuilder(
+    stream: bloc.emailStream,
+    builder: (BuildContext context, AsyncSnapshot snapshot) {
+    return TextField(
+      onChanged: bloc.changePassword,
+      decoration: InputDecoration(
+       
+       
+        labelText: 'Contraseña',
+        
+         errorText: snapshot.error?.toString(),
+       
+      ),
+    );
+    }
+  );
+}
+}
+
 Widget nologin(context){
   return Container
   (
@@ -129,22 +126,36 @@ Widget nologin(context){
     ],
   ),));
 }
-Widget ic(context){
-  return Container(child: Center(child: Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [ 
-      IconButton(
-            icon: const Icon(Icons.arrow_back_outlined),
-    iconSize: 40,
-            onPressed: () =>{
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context)=>HomePage(titulo: "",))
 
-          )
-            
-          },
-          ),
-    ],
-  ),),);
-}
+class SubmitButtonControl extends StatelessWidget {
+  const SubmitButtonControl({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    UserService userService = new UserService();
+    final bloc = LoginProvider.of(context);
+    return StreamBuilder(
+      stream: bloc.formValidStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return ElevatedButton(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
+              child: Text('Ingresar'),
+            ),
+            onPressed: snapshot.hasData
+                ? () async {
+                    Map info =
+                        await userService.login(bloc.email, bloc.password);
+
+                    if (info['ok']) {
+                      appProvider.token = info['token'];
+                    } else {
+                      print(info['message']);
+                    }
+                  }
+                : null);
+      },
+    );
+  }
+  }
