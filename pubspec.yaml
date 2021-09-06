@@ -50,8 +50,8 @@ dependencies:
   sqflite: ^2.0.0+3  
   shared_preferences: ^2.0.6
   flutter_speed_dial: ^4.2.0
-  jwt_decoder: ^2.0.1
   rxdart: ^0.27.1
+  jwt_decoder: ^2.0.1
   
 
   
@@ -61,6 +61,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_launcher_icons: "^0.9.2"
+  flutter_native_splash: ^1.2.1
+
+#Icono
+flutter_icons:
+  image_path: "assets/images/digital-wallet.png"
+  android: true
+#Splash
+flutter_native_splash:
+  color: '#142158'  
+  image: "assets/images/digital-wallet.png"
+  android: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

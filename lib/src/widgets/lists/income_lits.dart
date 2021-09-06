@@ -22,6 +22,7 @@ class _IncomeListtState extends State<IncomeList> {
   void initState() {
     super.initState();
     _loadIncome();
+    
     //Imprimir los tipos de pago
   
   }
