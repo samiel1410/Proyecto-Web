@@ -4,11 +4,10 @@ import 'package:pagosapp_group/src/models/expense_model.dart';
 import 'package:pagosapp_group/src/utils/standard_widgets.dart';
 import 'package:pagosapp_group/src/widgets/cards/expense_card.dart';
 
-
-
 class ExpenseList extends StatefulWidget {
-  const ExpenseList({Key? key,}) : super(key: key);
-  
+  const ExpenseList({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _ExpenseListtState createState() => _ExpenseListtState();
@@ -17,14 +16,12 @@ class ExpenseList extends StatefulWidget {
 class _ExpenseListtState extends State<ExpenseList> {
   ExpenseService _service = ExpenseService();
   List<Expense> _expense = [];
-  
 
   @override
   void initState() {
     super.initState();
     _loadIncome();
     //Imprimir los tipos de pago
-  
   }
 
   @override
@@ -39,9 +36,8 @@ class _ExpenseListtState extends State<ExpenseList> {
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
                 child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: _expense
-                        .map((e) => ExpenseCard(expe: e))
-                        .toList()),
+                    children:
+                        _expense.map((e) => ExpenseCard(expe: e)).toList()),
               );
   }
 
@@ -51,5 +47,4 @@ class _ExpenseListtState extends State<ExpenseList> {
       setState(() {});
     });
   }
-
 }

@@ -49,9 +49,7 @@ class MainPage extends StatelessWidget {
           ),
         ],*/
       ),
-      body: Container(
-          
-          child: contentWidget[selectedPage]),
+      body: Container(child: contentWidget[selectedPage]),
       floatingActionButton: selectedPage == 0
           ? SpeedDial(
               animatedIcon: AnimatedIcons.menu_close,
