@@ -48,7 +48,9 @@ class _ExpenseListtState extends State<ExpenseList> {
   _loadIncome() {
     _service.getPExpense().then((value) {
       _expense = value;
-      setState(() {});
+       if (mounted) {
+        setState(() {});
+      }
     });
   }
 

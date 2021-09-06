@@ -48,7 +48,9 @@ class _IncomeListtState extends State<IncomeList> {
   _loadIncome() {
     _service.getIncome().then((value) {
       _income = value;
-      setState(() {});
+       if (mounted) {
+        setState(() {});
+      }
     });
   }
 
