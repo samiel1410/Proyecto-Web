@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appProvider = Provider.of<AppProvider>(context, listen: false);
+    final appProvider = Provider.of<AppProvider>(context, listen: true);
     int selectedPage = appProvider.selectedPage;
 
     return Scaffold(

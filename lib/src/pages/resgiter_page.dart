@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pagosapp_group/providers/login_providers.dart';
 import 'package:pagosapp_group/services/user_services.dart';
 import 'package:pagosapp_group/src/models/user_model.dart';
+import 'package:pagosapp_group/src/pages/login_page.dart';
 
 
 class RegisterPage extends StatelessWidget {
@@ -21,8 +22,10 @@ class RegisterPage extends StatelessWidget {
           child: Center(
             child: ListView(
               children: <Widget>[
-                SizedBox(height: 20),
-                titulo(context),
+                Row( children:[ic(context),titulo(context)]),
+               
+              
+               
                 SizedBox(height: 20),
                 UsernameSignUpTextControl(),
                 SizedBox(height: 20),
@@ -46,7 +49,7 @@ Widget titulo(context) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Registrarse",
+          Text("REGISTRARSE",
               style: Theme.of(context)
                   .textTheme
                   .headline5!
@@ -157,7 +160,25 @@ class SubmitSignUpButtonControl extends StatelessWidget {
     );
   }
 }
+Widget ic(context){
+  return Container(child: Center(child: Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [ 
+      IconButton(
+            icon: const Icon(Icons.arrow_back_outlined),
+    iconSize: 40,
+            onPressed: () =>{
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context)=>LoginPage())
 
+          )
+            
+          },
+          ),
+    ],
+  ),),);
+}
 /*
 class SingUpPage extends StatefulWidget {
   const SingUpPage({Key? key}) : super(key: key);
