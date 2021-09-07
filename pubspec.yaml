@@ -44,7 +44,7 @@ dependencies:
   cloudinary_public: ^0.8.2
   sqlite3: ^1.1.2
   progress_indicator: ^0.2.0
-  firebase_core: ^1.4.0
+  firebase_core: ^1.6.0
   syncfusion_flutter_charts: ^19.2.48
   path_provider: ^2.0.2  
   sqflite: ^2.0.0+3  
@@ -52,6 +52,11 @@ dependencies:
   flutter_speed_dial: ^4.2.0
   rxdart: ^0.27.1
   jwt_decoder: ^2.0.1
+  firebase_messaging: ^10.0.6
+  flutter_local_notifications: ^8.1.1+2
+  
+dependency_overrides:
+  plugin_platform_interface: ^2.0.1
   
 
   
