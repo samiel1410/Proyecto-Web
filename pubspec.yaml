@@ -52,6 +52,7 @@ dependencies:
   flutter_speed_dial: ^4.2.0
   jwt_decoder: ^2.0.1
   rxdart: ^0.27.1
+  fl_chart: ^0.40.0
 
   
   
