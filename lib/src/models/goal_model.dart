@@ -19,6 +19,9 @@ class Goal {
     String name;
     double credit;
   Goal.create(this.name,this.credit);
+  
+
+  
     factory Goal.fromJson(Map<String, dynamic> json) => Goal(
         id: json["id"],
         name: json["name"],

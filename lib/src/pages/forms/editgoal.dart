@@ -13,10 +13,11 @@ class GoalElementForm extends StatefulWidget {
 
 class _GoalElementFormState extends State<GoalElementForm> {
 //Clave para vincular el Formulario (Form)
+
   final formKey = GlobalKey<FormState>();
 
   //Un objeto del modelo a enviar
-
+ 
   bool _onSaving = false;
   double _credit = 0;
   late Goal _element = Goal.create("",_credit);
@@ -27,6 +28,7 @@ class _GoalElementFormState extends State<GoalElementForm> {
 
   @override
   Widget build(BuildContext context) {
+    
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Stack(

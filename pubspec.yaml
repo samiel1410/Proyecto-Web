@@ -55,6 +55,7 @@ dependencies:
   firebase_messaging: ^10.0.6
   flutter_local_notifications: ^8.1.1+2
   google_maps_flutter: ^2.0.8
+  charts_flutter: ^0.11.0
   
 dependency_overrides:
   plugin_platform_interface: ^2.0.1

@@ -22,7 +22,7 @@ List<ItemMenu> settingsOptions = [
   ItemMenu(Icons.supervised_user_circle, "Créditos")
 ];
 
-List<Widget> contentWidget = [HomeWidget(), AnalisisPage(), GoalElementPage()];
+List<Widget> contentWidget = [HomeWidget(), SalesHomePage(), GoalElementPage()];
 GeoReference geoReferenceFromJson(String str) =>
     GeoReference.fromJson(json.decode(str));
 
