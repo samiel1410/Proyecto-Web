@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:pagosapp_group/src/models/expense_model.dart';
+import 'package:pagosapp_group/src/widgets/cards/bar_chart_widget.dart';
+import 'package:pagosapp_group/src/widgets/cards/line__chart_widget.dart';
+import 'package:pagosapp_group/src/widgets/lists/bar_chart_list.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class AnalisisPage extends StatefulWidget {
-  AnalisisPage({Key? key, }) : super(key: key);
+class AnalisisPage extends StatelessWidget {
+  final List<Expense> _userExpense = [];
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
- 
+  List<Expense> get _recentTransactions {
+    return _userExpense.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   @override
-  _AnalisisPageState createState() => _AnalisisPageState();
+  Widget build(BuildContext context) => Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(32),
+        ),
+        color: const Color(0xff020227),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: Chart(_recentTransactions),
+        ),
+      );
 }
-
+/*
 class _AnalisisPageState extends State<AnalisisPage> {
   late List<GDPData> _chartData;
   late TooltipBehavior _tooltipBehavior;
@@ -69,4 +78,4 @@ class GDPData {
   GDPData(this.continent, this.gdp);
   final String continent;
   final int gdp;
-}
+}*/

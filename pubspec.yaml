@@ -54,6 +54,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   firebase_messaging: ^10.0.6
   flutter_local_notifications: ^8.1.1+2
+  fl_chart: ^0.40.0
   
 dependency_overrides:
   plugin_platform_interface: ^2.0.1
@@ -78,6 +79,7 @@ flutter_native_splash:
   color: '#142158'  
   image: "assets/images/digital-wallet.png"
   android: true
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
