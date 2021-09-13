@@ -29,6 +29,7 @@ class _ExpenseListtState extends State<ExpenseList> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unnecessary_null_comparison
     return _expense == null
         ? Standard.getBoard(context, "Descargando gastos", Icons.download)
         : _expense.length == 0

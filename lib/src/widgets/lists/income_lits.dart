@@ -29,6 +29,7 @@ class _IncomeListtState extends State<IncomeList> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unnecessary_null_comparison
     return _income== null
         ? Standard.getBoard(context, "Descargando ingresos", Icons.download)
         : _income.length == 0

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:pagosapp_group/src/utils/enums.dart';
+
 Expense expenseFromJson(String str) => Expense.fromJson(json.decode(str));
 
 String expenseToJson(Expense data) => json.encode(data.toJson());
@@ -11,13 +13,14 @@ String expenseToJson(Expense data) => json.encode(data.toJson());
 class Expense {
     Expense({
          this.idexpense,
-       required this.categori,
-       required this.description,
-       required this.amount,
-       required this.date,
-      required  this.address,
+         required this.categori,
+         required this.description,
+         required this.amount,
+         required this.date,
+        required  this.address,
         required this.image,
-        this.photo
+        this.photo,
+        this.georeference
     });
 
     Expense.create(this.categori, this.description,this.amount, this.date, this.address , this.image );
@@ -30,6 +33,7 @@ class Expense {
     String address;
     String image;
     String? photo;
+    GeoReference? georeference;
 
     factory Expense.fromJson(Map<String, dynamic> json) => Expense(
         idexpense: json["idexpense"],
@@ -39,8 +43,11 @@ class Expense {
         date: DateTime.parse(json["date"]),
         address: json["address"],
         image: json["image"],
-        photo: json["photo"]
-    );
+        photo: json["photo"],
+         georeference: json["georeference"] == null
+          ? null
+          : GeoReference.fromJson(json["georeference"]));
+    
 
     Map<String, dynamic> toJson() => {
         "idexpense": idexpense,
