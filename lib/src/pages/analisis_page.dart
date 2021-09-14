@@ -4,50 +4,49 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:pagosapp_group/src/pages/sales.dart';
+import 'package:pagosapp_group/src/pages/expenses.dart';
 
-
-Future firebaseini() async{
+Future firebaseini() async {
   FirebaseApp initialization = await Firebase.initializeApp();
   return initialization;
 }
 
-Future firebase() async{
-  final usuario =  FirebaseAuth.instance.currentUser!.email;
+Future firebase() async {
+  final usuario = FirebaseAuth.instance.currentUser!.email;
   return usuario;
 }
 
-class SalesHomePage extends StatefulWidget {
+class ExpensesHomePage extends StatefulWidget {
   @override
-  _SalesHomePageState createState() {
-    return _SalesHomePageState();
+  _ExpensesHomePageState createState() {
+    return _ExpensesHomePageState();
   }
 }
 
-class _SalesHomePageState extends State<SalesHomePage> {
-   List<charts.Series<Sales, String>>? _seriesBarData;
-   List<Sales>? mydata;
-  CollectionReference coleccion = FirebaseFirestore.instance.collection('expense');
+class _ExpensesHomePageState extends State<ExpensesHomePage> {
+  List<charts.Series<Expenses, String>>? _seriesBarData;
+  List<Expenses>? mydata;
+  CollectionReference coleccion =
+      FirebaseFirestore.instance.collection('expense');
   _generateData(mydata) {
-    _seriesBarData = <charts.Series<Sales, String>>[];
+    _seriesBarData = <charts.Series<Expenses, String>>[];
     _seriesBarData!.add(
       charts.Series(
-        domainFn: (Sales sales, _) => sales.categori.toString(),
-        measureFn: (Sales sales, _) => sales.amount,
-        colorFn: (Sales sales, _) =>
-            charts.ColorUtil.fromDartColor(Color(int.parse("0xff109618"))),
-        id: 'Sales',
+        domainFn: (Expenses sales, _) => sales.categori.toString(),
+        measureFn: (Expenses sales, _) => sales.amount,
+        colorFn: (Expenses sales, _) =>
+            charts.ColorUtil.fromDartColor(Color(int.parse(sales.color))),
+        id: 'Expenses',
         data: mydata,
-        labelAccessorFn: (Sales row, _) => "${row.categori}",
+        labelAccessorFn: (Expenses row, _) => "${row.categori}",
       ),
     );
   }
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sales')),
+      appBar: AppBar(title: Text('Gastos')),
       body: _buildBody(context),
     );
   }
@@ -59,8 +58,9 @@ class _SalesHomePageState extends State<SalesHomePage> {
         if (!snapshot.hasData) {
           return LinearProgressIndicator();
         } else {
-          List<Sales> sales = snapshot.data!.docs
-              .map((documentSnapshot) => Sales.fromMap(documentSnapshot.data() as Map<String,dynamic>))
+          List<Expenses> sales = snapshot.data!.docs
+              .map((documentSnapshot) => Expenses.fromMap(
+                  documentSnapshot.data() as Map<String, dynamic>))
               .toList();
           return _buildChart(context, sales);
         }
@@ -68,11 +68,7 @@ class _SalesHomePageState extends State<SalesHomePage> {
     );
   }
 
-
-
-
-
-  Widget _buildChart(BuildContext context, List<Sales> saledata) {
+  Widget _buildChart(BuildContext context, List<Expenses> saledata) {
     mydata = saledata;
     _generateData(mydata);
     return Padding(
@@ -82,25 +78,26 @@ class _SalesHomePageState extends State<SalesHomePage> {
           child: Column(
             children: <Widget>[
               Text(
-                'Sales by Year',
+                'Gastos Anuales',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 10.0,
               ),
               Expanded(
-                child: charts.BarChart(_seriesBarData!,
-                    animate: true,
-                    animationDuration: Duration(seconds:5),
-                     behaviors: [
-                      new charts.DatumLegend(
-                        entryTextStyle: charts.TextStyleSpec(
-                            color: charts.MaterialPalette.purple.shadeDefault,
-                            fontFamily: 'Georgia',
-                            fontSize: 18),
-                      )
-                    ],
-                  ),
+                child: charts.BarChart(
+                  _seriesBarData!,
+                  animate: true,
+                  animationDuration: Duration(seconds: 5),
+                  behaviors: [
+                    new charts.DatumLegend(
+                      entryTextStyle: charts.TextStyleSpec(
+                          color: charts.MaterialPalette.purple.shadeDefault,
+                          fontFamily: 'Georgia',
+                          fontSize: 18),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

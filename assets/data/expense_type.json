@@ -2,67 +2,80 @@
     {
         "name" : "Casa",
         "description" : "Gastos del hogar",
-        "imagen" : "casa"
+        "imagen" : "casa",
+        "color" : "0xFFFF7043"
     },
     {
         "name" : "Comida",
         "description" : "Gastos de comida",
-        "imagen" : "comida"
+        "imagen" : "comida",
+        "color" : "0xFFFFA726"
     },
     {
         "name" : "Comunicaciones",
         "description" : "Gastos de comunicaciones como internet, telefono, celular",
-        "imagen" : "comunicaciones"
+        "imagen" : "comunicaciones",
+        "color" : "0xFFFFCA28"
     },
     {
         "name" : "Deportes",
         "description" : "Gastos en deportes",
-        "imagen" : "deportes"
+        "imagen" : "deportes",
+        "color" : "0xFFC6FF00"
     },
     {
         "name" : "Entretenimientos",
         "description" : "Gastos de entretenimiento como, Netflix, Cines, Paseos",
-        "imagen" : "entretenimientos"
+        "imagen" : "entretenimientos",
+        "color" : "0xFF66BB6A"
     },
     {
         "name" : "Facturas",
         "description" : "Gastos de facuras",
-        "imagen" : "facturas"
+        "imagen" : "facturas",
+        "color" : "0xFF26A69A"
     },
     {
         "name" : "Mascotas",
         "description" : "Gastos de mascotas, como comida, veterinario, ropa ",
-        "imagen" : "mascotas"
+        "imagen" : "mascotas",
+        "color" : "0xFF1DE9B6"
     },
     {
         "name" : "Regalos",
         "description" : "Gastos de regalos",
-        "imagen" : "regalos"
+        "imagen" : "regalos",
+        "color" : "0xFF26C6DA"
     },
     {
         "name" : "Ropa",
         "description" : "Gastos de ropa",
-        "imagen" : "ropa"
+        "imagen" : "ropa",
+        "color" : "0xFF29B6F6"
     },
     {
         "name" : "Restaurante",
         "description" : "Gastos de restaurantes",
-        "imagen" : "restaurante"
+        "imagen" : "restaurante",
+        "color" : "0xFF5C6BC0"
     },
     {
         "name" : "Salud",
         "description" : "Gastos de salud",
-        "imagen" : "salud"
+        "imagen" : "salud",
+        "color" : "0xFFAB47BC"
     },
     {
         "name" : "Transporte",
         "description" : "Gastos de transporte",
-        "imagen" : "transporte"
+        "imagen" : "transporte",
+        "color" : "0xFF7E57C2"
     },
     {
         "name" : "Educación",
         "description" : "Gastos de educación",
-        "imagen" : "educacion"
+        "imagen" : "educacion",
+        "color" : "0xFF8D6E63"
     }
 
 ]
