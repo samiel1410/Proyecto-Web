@@ -46,7 +46,6 @@ class _ExpensesHomePageState extends State<ExpensesHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Gastos')),
       body: _buildBody(context),
     );
   }
@@ -72,13 +71,13 @@ class _ExpensesHomePageState extends State<ExpensesHomePage> {
     mydata = saledata;
     _generateData(mydata);
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(1.0),
       child: Container(
         child: Center(
           child: Column(
             children: <Widget>[
               Text(
-                'Gastos Anuales',
+                'Porcentaje De Gastos',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -88,15 +87,8 @@ class _ExpensesHomePageState extends State<ExpensesHomePage> {
                 child: charts.BarChart(
                   _seriesBarData!,
                   animate: true,
-                  animationDuration: Duration(seconds: 5),
-                  behaviors: [
-                    new charts.DatumLegend(
-                      entryTextStyle: charts.TextStyleSpec(
-                          color: charts.MaterialPalette.purple.shadeDefault,
-                          fontFamily: 'Georgia',
-                          fontSize: 18),
-                    )
-                  ],
+                  animationDuration: Duration(seconds: 3),
+                 
                 ),
               ),
             ],

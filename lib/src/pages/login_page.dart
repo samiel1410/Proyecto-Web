@@ -87,6 +87,7 @@ class PasswordTextControl extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return TextField(
             onChanged: bloc.changePassword,
+            obscureText: true,
             decoration: InputDecoration(
                icon: Icon(Icons.lock_outline,
                   color: Theme.of(context).primaryColorDark),
